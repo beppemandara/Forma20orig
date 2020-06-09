@@ -1,0 +1,11 @@
+a:12:{s:18:"error_multiplehost";s:152:"Per questo host esistono già istanze del plugin di iscrizione MNet. E' consentito usare solo una istanza per host e/o una istanza per 'Tutti gli host'.";s:12:"instancename";s:29:"Nome del metodo di iscrizione";s:17:"instancename_help";s:211:"E' possibile impostare il nome dell'istanza del plugin di iscrizione MNet. Lasciando il campo vuoto verrà usato il nome di default, che prevede l'uso del nome dell'hots remoto e del ruolo assegnato agli utenti.";s:22:"mnet_enrol_description";s:725:"Per consentire gli amministratori del sito {$a} di iscrivere i loro utenti nei corsi presenti su questo sito.<br/>
+<ul><li><em>Requisito</em>: è necessario
+<strong>sottoscrivere</strong> il Servizio SSO (Identity Provider) offerto dal sito {$a}.</li>
+<li><em>Requisito</em>: è necessario
+<strong>offrire</strong> il Serivzio SSO (Service Provider) al sito {$a}.</li>
+</ul>
+<br/>Per consentirti di iscrivere i tuoi utenti ai corsi presenti sul sito {$a}.<br/>
+<ul>
+<li><em>Requisito</em>: è necessario <strong>offrire</strong> il servizio SSO (Identity Provider) al sito {$a}.</li>
+<li><em>Requisito</em>: è necessario <strong>sottoscrivere</strong> il serizio SSO (Service Provider) offerto dal sito {$a}.</li>
+</ul><br/>";s:15:"mnet_enrol_name";s:29:"Servizio remoto di iscrizione";s:10:"pluginname";s:22:"Iscrizioni remote MNet";s:15:"pluginname_desc";s:66:"Consente l'iscrizione ai corsi di utenti provenienti da host MNet.";s:16:"remotesubscriber";s:11:"Host remoto";s:21:"remotesubscriber_help";s:218:"Scegli 'Tutti gli host' se si desideri consentire l'accesso al corso da tutti i nodi MNet verso i quali pubblichi il servizi di iscrizione remota. In alternativa, imposta l'host dal quale consentire l'accesso al corso.";s:20:"remotesubscribersall";s:14:"Tutti gli host";s:18:"roleforremoteusers";s:23:"Ruolo per questo utente";s:23:"roleforremoteusers_help";s:55:"Il ruolo che riceverà l'utente remoto nell'host scelto";}

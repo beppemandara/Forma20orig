@@ -1,0 +1,20 @@
+s:2275:"<p>Il modulo di attività forum consente di tenere discussioni asincrone tra i partecipanti, la cui durata è prolungata nel tempo.</p>
+
+<p>Sono disponibili diversi tipi di forum tra cui scegliere,  forum standard dove chiunque può avviare una discussione, forum dove ciascuno studente può avviare una sola discussioni, forum domande e risposte, dove lo studente deve intervenire prima di poter visualizzare gli interventi degli altri. E' possibile consentire file allegati. Se gli allegati sono immagini saranno visualizzate direttamente nel corpo dell'intervento.</p>
+
+<p>I partecipanti possono sottoscrivere il forum per ricevere notifiche di nuovi interventi. Il docente può impostare la sottoscrizione al forum come facoltativa, obbligatoria, automatica. oppure può non consentirne la sottoscrizione. In caso di necessità è anche possibile bloccare studenti che abbiano postato più di un certo numero di interventi in un dato intervallo di tempo, riducendo il rischio che qualcuno domini la discussione.</p>
+
+<p>Gli interventi nei forum possono essere valutati dal docente o dagli stessi studenti (valutazione tra pari). I punteggi ottenuti vengono aggregati e memorizzati nel registro del valutatore.</p>
+
+<p>E' possibile usare il forum per:</p>
+
+<ul><li>uno spazio sociale per consentire ai partecipanti di conoscersi</li>
+<li>annunci del corso (usando il forum news a sottoscrizione obbligatoria)</li>
+<li>discutere sui contenuti o dispense del corso</li>
+<li>dare continuità ad un problema riscontrato durante sessioni in presenza</li>
+<li>svolgere discussioni tra docenti (usando un forum nascosto)</li>
+<li>area di supporto generale online tra docenti e studenti</li>
+<li>area di supporto individuale per colloqui privati tra docenti e studenti (usando un forum a gruppi separati con gruppi composti da un solo utente)</li>
+<li>estendere attività ad esempio proponendo problemi che gli studenti possono valutare per suggerire soluzioni</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/forum/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

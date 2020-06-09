@@ -1,0 +1,10 @@
+a:25:{s:5:"check";s:10:"Check code";s:7:"clihelp";s:298:"Check some PHP code against the Moodle coding guidelines.
+Options:
+  --interactive, -i Stops after every file allowing to continue with the next
+                    file or to repeat the check against the same one.
+  --help, -h        Shows this information
+Example:
+  php run.php local/codechecker";s:10:"error_find";s:20:"Folder search failed";s:7:"exclude";s:7:"Exclude";s:9:"other_eol";s:25:"Whitespace at end of line";s:9:"other_tab";s:27:"Tab character not permitted";s:13:"other_toolong";s:39:"Line longer than maximum 180 characters";s:16:"other_ratherlong";s:43:"Line longer than recommended 132 characters";s:10:"other_crlf";s:79:"Windows (CRLF) line ending instead of just LF (reporting only first occurrence)";s:15:"other_missinglf";s:43:"Missing LF at end of file (use exactly one)";s:14:"other_extralfs";s:52:"Extra blank line(s) at end of file (use exactly one)";s:10:"filesfound";s:17:"Files found: {$a}";s:11:"filesummary";s:24:"{$a->path} - {$a->count}";s:4:"info";s:407:"<p>Checks code against some aspects of the {$a->link}.</p>
+<p>Enter a path relative to the Moodle code root, for example: {$a->path}.</p>
+<p>You can enter either a specific PHP file, or to a folder to check all the files it contains.</p>
+<p>To exclude files, a comma separated list of substr matching paths can be used, for example: {$a->excludeexample}. Asterisks are allowed as wildchars at any place.</p>";s:15:"includewarnings";s:16:"Include warnings";s:11:"invalidpath";s:17:"Invalid path {$a}";s:22:"moodlecodingguidelines";s:24:"Moodle coding guidelines";s:17:"numerrorswarnings";s:51:"{$a->errors} error(s) and {$a->warnings} warning(s)";s:4:"path";s:13:"Path to check";s:16:"privacy:metadata";s:57:"The Code checker plugin does not store any personal data.";s:10:"pluginname";s:12:"Code checker";s:11:"recheckfile";s:23:"Re-check just this file";s:7:"success";s:10:"Well done!";s:7:"summary";s:11:"Total: {$a}";s:9:"wholefile";s:4:"File";}

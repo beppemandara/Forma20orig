@@ -1,0 +1,28 @@
+
+table#iscritti tr.even td.cell {
+    background-color: #f2f2ff;
+    border:1px solid #DDD;
+}
+
+table#iscritti tr.even_infostorico td.cell {
+    background-color: #f2f2ff;
+    border-width:0px;
+}
+
+table#iscritti tr.odd td.cell {
+    background-color: white;
+    border:1px solid #DDD;
+}
+
+table#iscritti tr.odd_infostorico td.cell {
+    background-color: white;
+    border-width:0px;
+}
+
+.err_box {
+    border:1px solid red;
+}
+
+table.iscritti {
+    width: 100%;
+}

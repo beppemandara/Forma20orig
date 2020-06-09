@@ -1,0 +1,89 @@
+/*form*/
+input[type="submit"], button, input[type="button"], input[type="reset"]{
+	background-color: #00B777;
+	padding: 3px 5px;
+	border: none;
+	color: #fff;	
+}
+
+input[type="text"], select, input[type="password"]{
+	border: 1px solid #386987;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+
+fieldset{
+	background-color: #EDEDED;
+	border: 4px solid #EDEDED !important;
+
+	}
+
+/*tabs*/
+.tabtree{
+	margin-bottom: 20px;
+}
+
+
+ul.tabrow0{
+	border-bottom: 4px solid #386987;
+	padding-bottom: 4px;
+
+}
+
+ul.tabrow0 li{
+	padding: 5px 10px;
+	margin-right: 10px;
+	background: #EDEDED;
+	font-size: 16px;
+}
+
+ul.tabrow0 li a{
+	color: #386987;
+
+}
+
+ul.tabrow0 li.selected{
+	background-color: #386987;
+	color: #FFF;
+}
+
+ul.tabrow0 li.selected a{
+	color: #FFF;
+}
+
+/*Iscrizione corsi*/
+
+#assignform .generaltable .c1 {
+	vertical-align:middle;
+}
+
+#assignform .generaltable .c1 #add{
+	margin-bottom: 10px;
+}
+
+/*Override*/
+.generalbox {
+	border: none;
+	margin-bottom: 20px;
+}
+tr.r1, tr.r0 {
+	margin: 5px 0;
+}
+tr.r1 td {
+	background-color: #f1f9ee;
+	padding: 5px;
+	border-right: 2px solid #FFF;
+	border-left: 2px solid #FFF;
+	border-collapse: separate;
+	text-align: left !important;
+}
+tr.r0 td {
+	background-color: #e4f1d7;
+	padding: 5px;
+	border-top: 8px solid #FFF;
+	border-bottom: 8px solid #FFF;
+	border-right: 2px solid #FFF;
+	border-left: 2px solid #FFF;
+	border-collapse: separate;
+	text-align: left !important;
+}

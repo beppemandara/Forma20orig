@@ -1,0 +1,27 @@
+SEGNAPOSTO:
+[Cognome]
+[Nome]
+[Qualifica]
+[Direzione]
+[Settore]
+[NomeCorso]
+[Localita]
+[Durata]
+[Data]
+[Ente]
+[Costo]
+[Beneficiario]
+[PartitaIva]
+[CodiceFiscale]
+[CodiceCreditore]
+[Note]
+[CassaEconomale]
+[Matricola]
+[Determina]
+[DataDetermina]
+[cod_direzione]
+[cod_settore]
+
+Es.
+<span align="center"><h3>Dati descrittivi del dipendente</h3></span>
+<div>Cognome e Nome: [Cognome] [Nome]</div>

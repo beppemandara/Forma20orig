@@ -1,0 +1,1 @@
+$(function(){$('table#id_tab_autosearch tbody[class="empty"] tr').remove();oTable=$('#id_tab_autosearch').dataTable({bJQueryUI:true,bProcessing:true,bPaginate:true,sPaginationType:"full_numbers",oLanguage:{sEmptyTable:"Nessun fornitore disponibile"}})})

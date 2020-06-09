@@ -1,0 +1,17 @@
+s:1769:"<p>Il modulo di attività Glossario consente  ai partecipanti di creare e gestire elenchi di voci, come ad esempio un dizionario o una raccolta di risorse e informazioni.</p>
+
+<p>Un docente può consentire di allegare file alle definizioni delle voci. I file allegati di tipo immagine vengono visualizzati assieme alla definizione.  E' possibile cercare voci oppure ordinarle alfabeticamente per categoria, data o autore. Per default le voci e le definizioni inserite sono considerati approvate, tuttavia,  prima di rendere la voce visibile a tutti i partecipanti. è anche possibile impostare l'approvazione da parte di un docente</p>
+
+<p>Tramite l'attivazione del filtro 'Link automatici al glossario' le voci potranno essere collegate automaticamente quando la voce compare nei testi del corso.</p>
+
+<p>Un docente può anche consentire l'inserimento di commenti alle voci. Le voci possono essere valutate sia dal docente sia dagli studenti (valutazione tra pari). I punteggi ottenuti vengono aggregati e memorizzati nel registro del valutatore.</p>
+
+<p>E' possibile usare i glossari per:</p>
+
+<ul><li>Una raccolta collaborativa di parole chiave</li>
+<li>Uno spazio per consentire agli studenti di inserire informazioni su loro stessi per conoscersi reciprocamente</li>
+<li>Suggerimenti utili o buone pratiche su un dato argomento</li>
+<li>Un'area di condivisione di video, immagini, o file musicali</li>
+<li>Una serie di argomenti da ricordare</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/glossary/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

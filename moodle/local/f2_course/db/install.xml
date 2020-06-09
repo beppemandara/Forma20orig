@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/agenzie/db" VERSION="20121123" COMMENT="XMLDB file for Forma 2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="f2_anagrafica_corsi" COMMENT="table retrofitted from MySQL" NEXT="f2_scheda_progetto">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="cf"/>
+        <FIELD NAME="cf" TYPE="float" LENGTH="7" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" DECIMALS="2" PREVIOUS="courseid" NEXT="course_type"/>
+        <FIELD NAME="course_type" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="cf" NEXT="tipo_budget"/>
+        <FIELD NAME="tipo_budget" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="course_type" NEXT="af"/>
+        <FIELD NAME="af" TYPE="char" LENGTH="3" NOTNULL="true" SEQUENCE="false" PREVIOUS="tipo_budget" NEXT="subaf"/>
+        <FIELD NAME="subaf" TYPE="char" LENGTH="3" NOTNULL="true" SEQUENCE="false" PREVIOUS="af" NEXT="to_x"/>
+        <FIELD NAME="to_x" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="subaf" NEXT="flag_dir_scuola"/>
+        <FIELD NAME="flag_dir_scuola" TYPE="char" LENGTH="1" NOTNULL="true" DEFAULT="S" SEQUENCE="false" PREVIOUS="to_x" NEXT="id_dir_scuola"/>
+        <FIELD NAME="id_dir_scuola" TYPE="int" LENGTH="2" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="flag_dir_scuola" NEXT="te"/>
+        <FIELD NAME="te" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id_dir_scuola" NEXT="sf"/>
+        <FIELD NAME="sf" TYPE="char" LENGTH="3" NOTNULL="true" SEQUENCE="false" PREVIOUS="te" NEXT="orario"/>
+        <FIELD NAME="orario" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" PREVIOUS="sf" NEXT="viaente"/>
+        <FIELD NAME="viaente" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" PREVIOUS="orario" NEXT="localita"/>
+        <FIELD NAME="localita" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" PREVIOUS="viaente" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="localita" NEXT="note"/>
+        <FIELD NAME="note" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="anno" NEXT="determina"/>
+        <FIELD NAME="determina" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" PREVIOUS="note" NEXT="costo"/>
+        <FIELD NAME="costo" TYPE="float" LENGTH="9" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" DECIMALS="2" PREVIOUS="determina" NEXT="durata"/>
+        <FIELD NAME="durata" TYPE="float" LENGTH="5" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" DECIMALS="2" PREVIOUS="costo" NEXT="num_min_all"/>
+        <FIELD NAME="num_min_all" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="durata" NEXT="num_norm_all"/>
+        <FIELD NAME="num_norm_all" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="num_min_all" NEXT="num_max_all"/>
+        <FIELD NAME="num_max_all" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="num_norm_all" NEXT="dir_proponente"/>
+        <FIELD NAME="dir_proponente" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="num_max_all" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false" PREVIOUS="dir_proponente" NEXT="usermodified"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="timemodified"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid_string" UNIQUE="true" FIELDS="courseid" COMMENT="courseid must be unique"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_scheda_progetto" COMMENT="table retrofitted from MySQL" PREVIOUS="f2_anagrafica_corsi" NEXT="f2_corsi_sedi_map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="sede_corso"/>
+        <FIELD NAME="sede_corso" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="courseid" NEXT="destinatari"/>
+        <FIELD NAME="destinatari" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="sede_corso" NEXT="accesso"/>
+        <FIELD NAME="accesso" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="destinatari" NEXT="obiettivi"/>
+        <FIELD NAME="obiettivi" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="accesso" NEXT="pfa"/>
+        <FIELD NAME="pfa" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="obiettivi" NEXT="pfb"/>
+        <FIELD NAME="pfb" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="pfa" NEXT="pfc"/>
+        <FIELD NAME="pfc" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="pfb" NEXT="pfd"/>
+        <FIELD NAME="pfd" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="pfc" NEXT="pfdir"/>
+        <FIELD NAME="pfdir" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="pfd" NEXT="pue"/>
+        <FIELD NAME="pue" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="pfdir" NEXT="met1"/>
+        <FIELD NAME="met1" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="pue" NEXT="met2"/>
+        <FIELD NAME="met2" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="met1" NEXT="met3"/>
+        <FIELD NAME="met3" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="met2" NEXT="monitoraggio"/>
+        <FIELD NAME="monitoraggio" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="met3" NEXT="valutazione"/>
+        <FIELD NAME="valutazione" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="monitoraggio" NEXT="apprendimento"/>
+        <FIELD NAME="apprendimento" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="valutazione" NEXT="ricaduta"/>
+        <FIELD NAME="ricaduta" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="apprendimento" NEXT="first"/>
+        <FIELD NAME="first" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="ricaduta" NEXT="last"/>
+        <FIELD NAME="last" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="first" NEXT="rev"/>
+        <FIELD NAME="rev" TYPE="int" LENGTH="2" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="last" NEXT="dispense_vigenti"/>
+        <FIELD NAME="dispense_vigenti" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="rev" NEXT="contenuti"/>
+        <FIELD NAME="contenuti" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="dispense_vigenti" NEXT="a"/>
+        <FIELD NAME="a" TYPE="char" LENGTH="32" NOTNULL="true" DEFAULT="QN" SEQUENCE="false" PREVIOUS="contenuti" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false" PREVIOUS="a" NEXT="usermodified"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="timemodified"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid_string" UNIQUE="true" FIELDS="courseid" COMMENT="courseid must be unique"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_corsi_sedi_map" COMMENT="table retrofitted from MySQL" PREVIOUS="f2_scheda_progetto" NEXT="f2_corsi_coorti_map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="sedeid"/>
+        <FIELD NAME="sedeid" TYPE="char" LENGTH="3" NOTNULL="true" SEQUENCE="false" PREVIOUS="courseid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_corsi_coorti_map" COMMENT="table retrofitted from MySQL" PREVIOUS="f2_corsi_sedi_map" NEXT="f2_tipo_pianificazione">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="coorteid"/>
+        <FIELD NAME="coorteid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="courseid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_tipo_pianificazione" COMMENT="f2_tipo_pianificazione table retrofitted from MySQL" PREVIOUS="f2_corsi_coorti_map" NEXT="f2_af">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_af" COMMENT="f2_af table retrofitted from MySQL" PREVIOUS="f2_tipo_pianificazione" NEXT="f2_subaf">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_subaf" COMMENT="f2_subaf table retrofitted from MySQL" PREVIOUS="f2_af" NEXT="f2_saf">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_saf" COMMENT="f2_saf table retrofitted from MySQL" PREVIOUS="f2_subaf" NEXT="f2_course_org_mapping">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="af"/>
+        <FIELD NAME="af" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="sub"/>
+        <FIELD NAME="sub" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="af"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="uk_af-saf-sub" TYPE="unique" FIELDS="af, sub" NEXT="id"/>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" PREVIOUS="uk_af-saf-sub"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="k_af" UNIQUE="false" FIELDS="af" NEXT="fk_sub-saf"/>
+        <INDEX NAME="fk_sub-saf" UNIQUE="false" FIELDS="sub" PREVIOUS="k_af"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_course_org_mapping" COMMENT="associazione org-corsi" PREVIOUS="f2_saf">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="courseid"></FIELD>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="orgid"/>
+        <FIELD NAME="orgid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false" PREVIOUS="courseid" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="uk_courseid-orgid" TYPE="unique" FIELDS="courseid orgid" NEXT="id"/>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" PREVIOUS="uk_courseid-orgid"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="fk_courseid" UNIQUE="false" FIELDS="courseid" NEXT="fk_orgid"/>
+        <INDEX NAME="fk_orgid" UNIQUE="false" FIELDS="orgid" PREVIOUS="fk_courseid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

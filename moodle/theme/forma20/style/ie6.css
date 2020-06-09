@@ -1,0 +1,32 @@
+body.ie6 #inst31 {
+	width: 100%;
+}
+body.ie6 #region-main .coursebox .info {
+	width: 100%;
+}
+body.ie6 #region-main .coursebox .summary {
+	width: 100% !important;
+}
+body.ie6 #inst33 {
+	width: 100%;
+}
+body.ie6 #inst32 {
+	width: 100%;
+}
+body.ie6 #inst29 {
+	width: 100%;
+}
+body.ie6 #inst34 {
+	width: 100%;
+}
+body.ie6 #inst34 h2, body.ie6 #inst34 p {
+	padding: 0 !important;
+}
+body.ie6 #inst34 h2 {
+	height: 49px;
+}
+body.ie6 .block .calendar-controls .current {
+	width: 68% !important;
+}
+body.ie6 .block_calendar_month {
+	margin-bottom: 0;}

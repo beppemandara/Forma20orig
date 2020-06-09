@@ -1,0 +1,77 @@
+2018-01-25 15:52:51 === MDEPLOY EXECUTION START ===
+2018-01-25 15:52:51 Successfully authorized using the passphrase file
+2018-01-25 15:52:51 Plugin upgrade requested
+2018-01-25 15:52:51 Downloading package https://moodle.org/plugins/download.php/15838/mod_hvp_moodle34_2018012200.zip
+2018-01-25 15:52:51 Using operating system CA certificates.
+2018-01-25 15:52:51 Using HTTP proxy
+2018-01-25 15:52:53 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/29c548a92cecc600c0b65aabc2d73c99.0.zip
+2018-01-25 15:52:53 MD5 checksum ok
+2018-01-25 15:52:53 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/mod/hvp
+2018-01-25 15:52:53 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/hvp_1516891973.0
+2018-01-25 15:52:57 Package successfully extracted
+2018-01-31 10:23:30 === MDEPLOY EXECUTION START ===
+2018-01-31 10:23:30 Successfully authorized using the passphrase file
+2018-01-31 10:23:30 Plugin upgrade requested
+2018-01-31 10:23:30 Downloading package https://moodle.org/plugins/download.php/15827/local_codechecker_moodle34_2018012000.zip
+2018-01-31 10:23:30 Using operating system CA certificates.
+2018-01-31 10:23:30 Using HTTP proxy
+2018-01-31 10:23:31 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/e82f91a3402bca7b646d9731c6a5ad0e.0.zip
+2018-01-31 10:23:31 MD5 checksum ok
+2018-01-31 10:23:31 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/local/codechecker
+2018-01-31 10:23:31 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/codechecker_1517390611.0
+2018-01-31 10:23:35 Package successfully extracted
+2019-11-14 14:49:29 === MDEPLOY EXECUTION START ===
+2019-11-14 14:49:29 Successfully authorized using the passphrase file
+2019-11-14 14:49:29 Plugin upgrade requested
+2019-11-14 14:49:29 Downloading package https://moodle.org/plugins/download.php/20199/report_benchmark_moodle37_2019083101.zip
+2019-11-14 14:49:29 Using operating system CA certificates.
+2019-11-14 14:49:29 Using HTTP proxy
+2019-11-14 14:49:30 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/353fec2b1101b87f19f2443f36d2da20.0.zip
+2019-11-14 14:49:30 MD5 checksum ok
+2019-11-14 14:49:30 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/report/benchmark
+2019-11-14 14:49:30 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/benchmark_1573739370.0
+2019-11-14 14:49:30 Package successfully extracted
+2019-11-14 14:51:44 === MDEPLOY EXECUTION START ===
+2019-11-14 14:51:44 Successfully authorized using the passphrase file
+2019-11-14 14:51:44 Plugin upgrade requested
+2019-11-14 14:51:44 Downloading package https://moodle.org/plugins/download.php/16831/local_mailtest_moodle37_2018052100.zip
+2019-11-14 14:51:44 Using operating system CA certificates.
+2019-11-14 14:51:44 Using HTTP proxy
+2019-11-14 14:51:44 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/cdf18764685f5a0b3a889af378b2a190.0.zip
+2019-11-14 14:51:44 MD5 checksum ok
+2019-11-14 14:51:44 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/local/mailtest
+2019-11-14 14:51:44 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/mailtest_1573739504.0
+2019-11-14 14:51:44 Package successfully extracted
+2019-11-14 14:53:20 === MDEPLOY EXECUTION START ===
+2019-11-14 14:53:20 Successfully authorized using the passphrase file
+2019-11-14 14:53:20 Plugin upgrade requested
+2019-11-14 14:53:20 Downloading package https://moodle.org/plugins/download.php/17287/local_codechecker_moodle35_2018070100.zip
+2019-11-14 14:53:20 Using operating system CA certificates.
+2019-11-14 14:53:20 Using HTTP proxy
+2019-11-14 14:53:20 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/cea5b8d0a34320fabc3eecb42e01facd.0.zip
+2019-11-14 14:53:20 MD5 checksum ok
+2019-11-14 14:53:20 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/local/codechecker
+2019-11-14 14:53:20 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/codechecker_1573739600.0
+2019-11-14 14:53:24 Package successfully extracted
+2019-11-14 14:54:50 === MDEPLOY EXECUTION START ===
+2019-11-14 14:54:50 Successfully authorized using the passphrase file
+2019-11-14 14:54:50 Plugin upgrade requested
+2019-11-14 14:54:50 Downloading package https://moodle.org/plugins/download.php/19944/mod_game_moodle38_2019071203.zip
+2019-11-14 14:54:50 Using operating system CA certificates.
+2019-11-14 14:54:50 Using HTTP proxy
+2019-11-14 14:54:51 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/b6644ecc4bd1a693355b248527fdbcd8.0.zip
+2019-11-14 14:54:51 MD5 checksum ok
+2019-11-14 14:54:51 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/mod/game
+2019-11-14 14:54:51 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/game_1573739691.0
+2019-11-14 14:54:52 Package successfully extracted
+2019-11-14 14:57:23 === MDEPLOY EXECUTION START ===
+2019-11-14 14:57:23 Successfully authorized using the passphrase file
+2019-11-14 14:57:23 Plugin upgrade requested
+2019-11-14 14:57:23 Downloading package https://moodle.org/plugins/download.php/20571/mod_hvp_moodle38_2019111300.zip
+2019-11-14 14:57:23 Using operating system CA certificates.
+2019-11-14 14:57:23 Using HTTP proxy
+2019-11-14 14:57:24 Package downloaded into /var/www/www.forma20.it/app/moodledata/mdeploy/var/0937cc22193fa579f00b7b80c363e830.0.zip
+2019-11-14 14:57:24 MD5 checksum ok
+2019-11-14 14:57:24 Current plugin code location: /var/www/www.forma20.it/htdocs/moodle/mod/hvp
+2019-11-14 14:57:24 Moving the current code into archive: /var/www/www.forma20.it/app/moodledata/mdeploy/archive/hvp_1573739844.0
+2019-11-14 14:57:27 Package successfully extracted

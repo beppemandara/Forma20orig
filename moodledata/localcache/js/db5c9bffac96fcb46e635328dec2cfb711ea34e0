@@ -1,0 +1,1 @@
+$("#removeselect option").each(function(i){$(this).attr("title",function(){return $(this).text()});$(this).Tooltip({track:true,delay:0,showURL:false,opacity:0.90})})

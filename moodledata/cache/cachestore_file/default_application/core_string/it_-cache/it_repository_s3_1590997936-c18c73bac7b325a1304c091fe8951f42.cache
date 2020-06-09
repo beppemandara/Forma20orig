@@ -1,0 +1,1 @@
+a:7:{s:10:"access_key";s:16:"Chiave d'accesso";s:12:"configplugin";s:22:"Impostazioni Amazon S3";s:8:"endpoint";s:18:"Endpoint Amazon S3";s:13:"needaccesskey";s:33:"Devi fornire una chiave d'accesso";s:10:"pluginname";s:9:"Amazon S3";s:10:"secret_key";s:14:"Chiave segreta";s:7:"s3:view";s:33:"Visualizzare repository Amazon S3";}

@@ -1,0 +1,11 @@
+s:1131:"<p>Il modulo file consente al docente di inserire file tra le risorse del corso. Il file potrà essere  visualizzato all'interno dell'interfaccia del corso, qualora tale visualizzazione non fosse possibile, sarà fornito un link diretto per scaricare il file. I file possono incapsulare altri file, come ad esempio pagine HTML contenenti immagini e oggetti Flash.</p>
+
+<p>Da notare che lo studente nel proprio computer deve avere il software necessario per visualizzare il tipo di file usato come risorsa.</p>
+
+<p>E' possibile usare file per:</p>
+
+<ul><li>Condividere una presentazione svolta in classe</li>
+<li>Includere nel corso piccoli siti web</li>
+<li>Fornire bozze da usare con software client (ad esempio file Photoshop .psd) che gli studenti possono usare per preparare e consegnare i propri compiti</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/resource/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

@@ -1,0 +1,12 @@
+s:1396:"<p>Il modulo di attività tool esterno consente agli studenti di interagire con risorse formative ed attività presenti su altri siti web. Ad esempio, un tool esterno può fornire l'accesso a nuovi tipi di attività o materiali resi disponibili da un editore.</p>
+
+<p>Per creare un'attività tool esterno, è necessario un tool provider che supporti LTI (Learning Tools Interoperability).
+Un docente può creare una attività tool esterno oppure può utilizzare tool esterni configurati dall'amministratore del sito.</p>
+
+<p>I tool esterni si differenziano da una risorsa di tipo URL per diversi aspetti:</p>
+
+<ul><li>I tool esterni possono conoscere il contesto, ossia possono avere accesso alle informazioni dell'utente che li ha lanciati, come l'istituzione di appartenenza, il corso, il nome, eccetera.</li>
+<li>I tool esterni possono leggere, aggiornare ed eliminare le valutazioni associate alla istanza dell'attività.</li>
+<li>Le configurazioni di I tool esterni creano una relazione di trust tra Moodle e il tool provider, assicurando un canale di comunicazione sicuro.</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/lti/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

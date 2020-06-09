@@ -1,0 +1,17 @@
+s:1340:"<p>Il modulo di attività quiz consente al docente di creare questionari con diversi tipi di domande: scelta multipla, vero/falso, corrispondenza, risposta breve, calcolata,eccetera.</p>
+
+<p>Il docente può impostare il quiz affinché sia possibile tentarlo più volte con l'ordine delle domande cambiato casualmente o con domande pescate casualmente ad ogni nuovo tentativo.  E' anche possibile impostare un tempo massimo di svolgimento.</p>
+
+<p>Ogni tentativo viene valutato automaticamente (ad eccezione delle domande componimento) e la valutazione viene memorizzata nel registro del valutatore.</p>
+
+<p>Il docente può decidere quando e come far vedere agli studenti le risposte esatte, i feedback ed eventuali suggerimenti.</p>
+
+<p>E' possibile usare il quiz per:</p>
+
+<ul><li>esami dei corsi</li>
+<li>brevi test su dispense di studio o alla termine di un argomento</li>
+<li>pratica di esami usando domande provenienti da esami di anni precedenti</li>
+<li>dare un feedback sulla performance</li>
+<li>auto valutazione</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/quiz/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

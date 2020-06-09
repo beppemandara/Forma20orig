@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/f2_gestione_risorse/db" VERSION="20121123" COMMENT="XMLDB file for Moodle blocks/f2_gestione_risorse"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="block_f2_gestione_risorse" COMMENT="Default comment for block_f2_gestione_risorse, please edit me" NEXT="f2_fornitori">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_fornitori" COMMENT="f2_fornitori table retrofitted from MySQL" PREVIOUS="block_f2_gestione_risorse" NEXT="f2_partialbdgt">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="id_org"/>
+        <FIELD NAME="id_org" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" DEFAULT="-1" SEQUENCE="false" PREVIOUS="id" NEXT="denominazione"/>
+        <FIELD NAME="denominazione" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="id_org" NEXT="cognome"/>
+        <FIELD NAME="cognome" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="denominazione" NEXT="nome"/>
+        <FIELD NAME="nome" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="cognome" NEXT="url"/>
+        <FIELD NAME="url" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="nome" NEXT="partita_iva"/>
+        <FIELD NAME="partita_iva" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="url" NEXT="codice_fiscale"/>
+        <FIELD NAME="codice_fiscale" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="partita_iva" NEXT="codice_creditore"/>
+        <FIELD NAME="codice_creditore" TYPE="char" LENGTH="300" NOTNULL="true" SEQUENCE="false" PREVIOUS="codice_fiscale" NEXT="tipo_formazione"/>
+        <FIELD NAME="tipo_formazione" TYPE="char" LENGTH="6" NOTNULL="false" SEQUENCE="false" COMMENT="Se la prima cifra partendo da destra = 1 significa che e settato individuale 2 cifra da destra = 1 settato obiettivo 3 cifra da destra = 1 settato programmata es 001=individuale 011=obiettivo individuale" PREVIOUS="codice_creditore" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="tipo_formazione" NEXT="nota"/>
+        <FIELD NAME="nota" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="stato" NEXT="indirizzo"/>
+        <FIELD NAME="indirizzo" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="nota" NEXT="cap"/>
+        <FIELD NAME="cap" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" PREVIOUS="indirizzo" NEXT="citta"/>
+        <FIELD NAME="citta" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="cap" NEXT="provincia"/>
+        <FIELD NAME="provincia" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="citta" NEXT="paese"/>
+        <FIELD NAME="paese" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="provincia" NEXT="fax"/>
+        <FIELD NAME="fax" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" PREVIOUS="paese" NEXT="telefono"/>
+        <FIELD NAME="telefono" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" PREVIOUS="fax" NEXT="email"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="telefono" NEXT="preferiti"/>
+        <FIELD NAME="preferiti" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="email"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="mdl_f2forn_cod_uix" TYPE="unique" FIELDS="codice_fiscale" NEXT="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" PREVIOUS="mdl_f2forn_cod_uix"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_partialbdgt" COMMENT="f2_partialbdgt table retrofitted from MySQL" PREVIOUS="f2_fornitori" NEXT="f2_org_budget">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="orgfk"/>
+        <FIELD NAME="orgfk" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="anno" NEXT="settori"/>
+        <FIELD NAME="settori" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="orgfk" NEXT="dirigenti"/>
+        <FIELD NAME="dirigenti" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="settori" NEXT="personale"/>
+        <FIELD NAME="personale" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="dirigenti" NEXT="ap_poa"/>
+        <FIELD NAME="ap_poa" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="personale" NEXT="totb"/>
+        <FIELD NAME="totb" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="ap_poa" NEXT="criterioa"/>
+        <FIELD NAME="criterioa" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="totb" NEXT="criteriob"/>
+        <FIELD NAME="criteriob" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="criterioa" NEXT="criterioc"/>
+        <FIELD NAME="criterioc" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="criteriob" NEXT="criteriod"/>
+        <FIELD NAME="criteriod" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="criterioc" NEXT="coefficiente"/>
+        <FIELD NAME="coefficiente" TYPE="float" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="criteriod" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="coefficiente" NEXT="usrname"/>
+        <FIELD NAME="usrname" TYPE="char" LENGTH="90" NOTNULL="true" SEQUENCE="false" PREVIOUS="lstupd" NEXT="modificato"/>
+        <FIELD NAME="modificato" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="usrname"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_org_budget" COMMENT="f2_org_budget table retrofitted from MySQL" PREVIOUS="f2_partialbdgt" NEXT="f2_formatore">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="orgfk"/>
+        <FIELD NAME="orgfk" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="anno" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" COMMENT="tipo1 = aula, tipo2 = lingue, tipo3 = e_learning, tipo4 = individuale, tipo5 = obiettivo" PREVIOUS="orgfk" NEXT="money_bdgt"/>
+        <FIELD NAME="money_bdgt" TYPE="float" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="tipo" NEXT="days_bdgt"/>
+        <FIELD NAME="days_bdgt" TYPE="float" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="money_bdgt" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="days_bdgt" NEXT="usrname"/>
+        <FIELD NAME="usrname" TYPE="char" LENGTH="90" NOTNULL="true" SEQUENCE="false" PREVIOUS="lstupd"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="anno" TYPE="unique" FIELDS="anno, orgfk, tipo" NEXT="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" PREVIOUS="anno"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_formatore" COMMENT="f2_formatore table retrofitted from MySQL" PREVIOUS="f2_org_budget" NEXT="f2_formsubaf_map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="piva"/>
+        <FIELD NAME="piva" TYPE="char" LENGTH="11" NOTNULL="false" SEQUENCE="false" PREVIOUS="id" NEXT="tstudio"/>
+        <FIELD NAME="tstudio" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" PREVIOUS="piva" NEXT="dettstudio"/>
+        <FIELD NAME="dettstudio" TYPE="char" LENGTH="765" NOTNULL="false" SEQUENCE="false" PREVIOUS="tstudio" NEXT="prof"/>
+        <FIELD NAME="prof" TYPE="char" LENGTH="765" NOTNULL="false" SEQUENCE="false" PREVIOUS="dettstudio" NEXT="ente"/>
+        <FIELD NAME="ente" TYPE="char" LENGTH="765" NOTNULL="false" SEQUENCE="false" PREVIOUS="prof" NEXT="tipodoc"/>
+        <FIELD NAME="tipodoc" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="ente" NEXT="categoria"/>
+        <FIELD NAME="categoria" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="tipodoc" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="categoria" NEXT="usrid"/>
+        <FIELD NAME="usrid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="lstupd" NEXT="cf"/>
+        <FIELD NAME="cf" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" PREVIOUS="usrid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="fk_formatore-usrid" UNIQUE="false" FIELDS="usrid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_formsubaf_map" COMMENT="f2_formsubaf_map table retrofitted from MySQL" PREVIOUS="f2_formatore" NEXT="f2_sessioni">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="formid"/>
+        <FIELD NAME="formid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="subafid"/>
+        <FIELD NAME="subafid" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="formid" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="subafid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="uk_form-subaf_map" TYPE="unique" FIELDS="formid, subafid" NEXT="id"/>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" PREVIOUS="uk_form-subaf_map"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="fk_subafid-formsubaf_map" UNIQUE="false" FIELDS="subafid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_sessioni" COMMENT="f2_sessioni table retrofitted from MySQL" PREVIOUS="f2_formsubaf_map" NEXT="f2_stati_funz">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="numero"/>
+        <FIELD NAME="numero" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="anno" NEXT="data_inizio"/>
+        <FIELD NAME="data_inizio" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="numero" NEXT="data_fine"/>
+        <FIELD NAME="data_fine" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="data_inizio" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="data_fine" NEXT="percentuale_corsi"/>
+        <FIELD NAME="percentuale_corsi" TYPE="number" LENGTH="6" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" DECIMALS="3" PREVIOUS="stato"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="uk_sessioni_num-anno" TYPE="unique" FIELDS="numero, anno" NEXT="id"/>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" PREVIOUS="uk_sessioni_num-anno"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_stati_funz" COMMENT="f2_stati_funz table retrofitted from MySQL" PREVIOUS="f2_sessioni">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" NEXT="aperto"/>
+        <FIELD NAME="aperto" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="id" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="aperto" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

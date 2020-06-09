@@ -1,0 +1,8 @@
+s:985:"<p>Il modulo cartella consente al docente di visualizzare in un unica cartella un insieme di file correlati tra loro, riducendo la dimensione della pagine home del corso. Ad esempio, è possibile caricare una cartella compressa per poi decomprimerla e renderla disponibile, oppure è possibile creare una cartella vuota e caricarci dei file direttamente.</p>
+
+<p>Una cartella può essere usata per:</p>
+
+<ul><li>un insieme di file su un dato argomento, ad esempio un insieme di temi d'esame svolti in passato in formato pdf</li>
+<li>fornire uno spazio comune dove i docenti possono caricare e condividere file del corso (tenendo la cartella nascosta agli studenti)</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/folder/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

@@ -1,0 +1,307 @@
+/* GENERALI */
+a {
+	text-decoration: none;
+}
+h2.main {
+	border-bottom: 3px solid #FF0000;
+	color: #FF0000;
+	text-align: center;
+}
+h2.headingblock {
+	font-size: 26pt;
+	margin-top: 0;
+	color: #386A85;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+/* HEADER */
+#region-top {
+	background: #00B777 url([[pix:theme|/freccia_top]]) no-repeat top left;
+	height: 46px;
+	margin-bottom: 20px;
+	border-bottom: 1px dashed #FFF;
+}
+.logininfo {
+	width: 150px;
+	margin-top: 10px;
+	color: #243F52;
+	font-weight: bold;
+	font-size: 12px;
+	margin-left: 130px;
+}
+.logininfo a {
+	color: #F6FF02;
+}
+/* TESTATA */
+h1.headermain {
+	color: #000;
+	background: url([[pix:theme|/logo]]) no-repeat top left;
+	width: 350px;
+	height: 82px;
+	margin: 0;
+}
+h1.headermain strong {
+	display: none;
+}
+#region-dxheader p {
+	font-size: 20px;
+	line-height: 20px;
+	color: #386A85;
+	margin-left: 50px;
+	margin-top: 10px;
+}
+#region-dxheader .block {
+	border: none;
+}
+/*BREDCREUMBS*/
+.navbar {
+	display: none;
+}
+/* BLOCCO CORSI */
+#region-main {
+	padding-top: 10px;
+}
+#region-main .coursebox .info h3 {
+	margin: 0;
+}
+#region-main .coursebox .info h3 a {
+	color: #00B777;
+}
+#region-main .coursebox .summary {
+	float: left;
+	border-bottom: 1px dashed #00B777;
+	clear: both;
+	margin-bottom: 10px;
+}
+/*BLOCCO ASSISTENZA*/
+#inst33 p {
+	margin: 0;
+	float: left;
+	width: 215px;
+}
+#inst33 ul#lista_supporto {
+	margin: 0;
+	float: left;
+}
+#inst33 ul#lista_supporto li {
+	list-style: none;
+	display: inline;
+}
+#inst33 ul#lista_supporto li a {
+	display: block;
+	width: 28px;
+	height: 45px;
+	float: left;
+	margin-right: 10px;
+}
+#inst33 ul#lista_supporto li a strong {
+	display: none;
+}
+#inst33 ul#lista_supporto li a#supp_mail {
+	background: url([[pix:theme|/ico_mail]]) no-repeat
+}
+#inst33 ul#lista_supporto li a#supp_skype {
+	background: url([[pix:theme|/ico_skype]]) no-repeat
+}
+#inst33 ul#lista_supporto li a#supp_form {
+	background: url([[pix:theme|/ico_form]]) no-repeat
+}
+/* === COLONNA CENTRALE === */
+#region-pre {
+	padding-top: 20px;
+}
+/* BLOCCO VIDEI TUTORIAL */
+#inst33 h2, #inst32 h2 {
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #00B777;
+}
+#inst32 ul {
+	margin: 0;
+}
+#inst32 ul li {
+	list-style: none;
+	background: url([[pix:theme|/ico_video]]) no-repeat 0 5px;
+	line-height: 20px;
+	border-bottom: 1px solid #00B777;
+	padding: 5px 0 5px 20px;
+}
+
+#inst32 ul li:last-child {
+	border-bottom: none;
+}
+
+#inst32 ul li a {
+	color: #386987;
+}
+/* CALENDARIO */
+.block_calendar_month {
+	margin-bottom: 20px;
+	width: 100%;
+}
+.block_calendar_month h2 {
+	display: none;
+}
+.block_calendar_month .content .calendar-controls .current a {
+	color: #396B84;
+	font-weight: normal;
+	text-transform: capitalize;
+	font-size: 16px;
+}
+a.next {
+	background: url([[pix:theme|/arrow_cal_dx]]) no-repeat top left;
+	height: 21px;
+	width: 13px;
+}
+a.previous {
+	background: url([[pix:theme|/arrow_cal_sx]]) no-repeat top left;
+	height: 21px;
+	width: 13px;
+}
+a.next .arrow, a.previous .arrow {
+	display: none;
+}
+.block_calendar_month .content .calendar-controls a {
+	color: #000;
+	font-weight: bold;
+}
+.block_calendar_month .content .minicalendar tr {
+	border-color: #FFF;
+	font-size: 12px;
+}
+.block_calendar_month .content .minicalendar td {
+	border-color: #FFF;
+	font-size: 12px;
+	border: 1px solid #6BC6FF;
+}
+.block_calendar_month .content .minicalendar td.today {
+	background-color: #00B777;
+	color: #FFF;
+}
+.block_calendar_month .content .minicalendar .day {
+	color: #00B777;
+	background-color: #FFF;
+}
+.block_calendar_month .content .minicalendar .day a {
+	color: #FFF;
+	font-weight: bold;
+}
+.block_calendar_month .content .minicalendar .weekdays th {
+	border-width: 0;
+	font-weight: bold;
+	color: #000;
+	border: 1px solid #6BC6FF;
+}
+.block_calendar_month .content .minicalendar .weekdays abbr {
+	border-width: 0;
+	text-decoration: none;
+	color: #386A85;
+}
+/*NOTIZIE*/
+#inst29 {
+	background-color: #EDEDED;
+}
+.block_news_items h2 {
+	font-size: 26px;
+	font-weight: normal;
+	color: #386A85;
+	text-transform: uppercase;
+	padding-top: 10px;
+}
+.block_news_items .content, .block_news_items .header {
+	margin: 0 10px;
+}
+.block_news_items .newsitem {
+	margin-bottom: 20px;
+}
+.block_news_items .newsitem h3 {
+	margin: 0;
+}
+.block_news_items a {
+	color: #00B777;
+	font-weight: bold;
+}
+.block_news_items .footer {
+	padding-bottom: 15px;
+}
+.block_news_items .footer a {
+	color: #386A85;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+/* BLOCCO SOCIAL */
+#inst34 {
+	background-color: #386987;
+	color: #FFF;
+}
+#inst34 h2 {
+	background: url([[pix:theme|/logo_social]]) no-repeat 10px 10px;
+	height: 39px;
+	padding: 10px 0 0 10px;
+	margin: 0;
+}
+#inst34 h2 strong {
+	display: none;
+}
+#inst34 p {
+	margin: 10px;
+}
+/*FOOTER*/	 
+	 
+#page-footer {
+	clear: both;
+	padding-top: 10px;
+	border-top: 13px solid #00B777;
+	text-align: left;
+	margin-bottom: 10px;
+}
+#page-footer ul {
+	margin: 0;
+}
+#page-footer ul li {
+	list-style: none;
+	display: inline;
+}
+#page-footer ul li a {
+	display: block;
+	width: 100px;
+	height: 35px;
+	float: left;
+	margin-right: 20px;
+}
+#page-footer ul li a#banner_RP {
+	background: url([[pix:theme|/logo_RP]]) no-repeat top left;
+}
+#page-footer ul li a#banner_CRP {
+	background: url([[pix:theme|/logo_CRP]]) no-repeat top left;
+}
+#page-footer ul li a#banner_CSI {
+	background: url([[pix:theme|/logo_CSI]]) no-repeat top left;
+}
+#page-footer ul li a strong {
+	display: none;
+}
+/* AMMINISTRAZIONE */
+.block_settings_navigation_tree .content .footer {
+	text-align: center;
+}
+.block_settings_navigation_tree .content .footer .adminsearchform {
+	margin-left: 5%;
+	width: 90%;
+	font-size: 9pt;
+}
+.block_settings_navigation_tree .content .footer .adminsearchform #adminsearchquery {
+	width: 95%;
+}
+/* OVERRIDES*/
+.block {
+	border: none;
+}
+.block .content {
+	padding: 0px !important;
+}
+.no-overflow {
+	overflow: hidden;
+	padding: 0 !important;
+	clear: both;
+}

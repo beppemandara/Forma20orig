@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/f2_support/db" VERSION="20130109" COMMENT="XMLDB file for Moodle local/f2_support"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="f2_b" COMMENT="f2_b table retrofitted from MySQL" NEXT="f2_gest_codpart">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_gest_codpart" COMMENT="f2_gest_codpart table retrofitted from MySQL" PREVIOUS="f2_b" NEXT="f2_partecipazioni">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_partecipazioni" COMMENT="f2_partecipazioni table retrofitted from MySQL" PREVIOUS="f2_gest_codpart" NEXT="f2_pd">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="codpart"/>
+        <FIELD NAME="codpart" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="id" NEXT="descrpart"/>
+        <FIELD NAME="descrpart" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" PREVIOUS="codpart" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrpart" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_pd" COMMENT="f2_pd table retrofitted from MySQL" PREVIOUS="f2_partecipazioni" NEXT="f2_sf">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_sf" COMMENT="f2_sf table retrofitted from MySQL" PREVIOUS="f2_pd" NEXT="f2_piani_di_studio">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_piani_di_studio" COMMENT="f2_piani_di_studio table retrofitted from MySQL" PREVIOUS="f2_sf" NEXT="f2_sedi">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="qualifica"/>
+        <FIELD NAME="qualifica" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="sf"/>
+        <FIELD NAME="sf" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="qualifica" NEXT="crediti_richiesti"/>
+        <FIELD NAME="crediti_richiesti" TYPE="number" LENGTH="8" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" DECIMALS="2" PREVIOUS="sf" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="crediti_richiesti"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sf" UNIQUE="false" FIELDS="sf"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_sedi" COMMENT="f2_sedi table retrofitted from MySQL" PREVIOUS="f2_piani_di_studio" NEXT="f2_sf_af_map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_sf_af_map" COMMENT="f2_sf_af_map table retrofitted from MySQL" PREVIOUS="f2_sedi" NEXT="f2_te">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="sf"/>
+        <FIELD NAME="sf" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="af"/>
+        <FIELD NAME="af" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="sf"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="fk_sf_af_map_sfk" UNIQUE="false" FIELDS="sf" NEXT="fk_sf_af_map_afk"/>
+        <INDEX NAME="fk_sf_af_map_afk" UNIQUE="false" FIELDS="af" PREVIOUS="fk_sf_af_map_sfk"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_te" COMMENT="f2_te table retrofitted from MySQL" PREVIOUS="f2_sf_af_map" NEXT="f2_tipo">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_tipo" COMMENT="f2_tipo table retrofitted from MySQL" PREVIOUS="f2_te" NEXT="f2_to_x">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="4" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_to_x" COMMENT="f2_to_x table retrofitted from MySQL" PREVIOUS="f2_tipo" NEXT="f2_totali_crediti">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_totali_crediti" COMMENT="f2_totali_crediti table retrofitted from MySQL" PREVIOUS="f2_to_x" NEXT="f2_va">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="3" NOTNULL="true" SEQUENCE="false" NEXT="cf_necessari"/>
+        <FIELD NAME="cf_necessari" TYPE="number" LENGTH="5" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" DECIMALS="2" PREVIOUS="id"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_va" COMMENT="f2_va table retrofitted from MySQL" PREVIOUS="f2_totali_crediti" NEXT="f2_parametri">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="progr_displ"/>
+        <FIELD NAME="progr_displ" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" PREVIOUS="progr_displ"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_parametri" COMMENT="f2_parametri table retrofitted from MySQL" PREVIOUS="f2_va" NEXT="f2_forzature">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" NEXT="descrizione"/>
+        <FIELD NAME="descrizione" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="val_int"/>
+        <FIELD NAME="val_int" TYPE="int" LENGTH="20" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="descrizione" NEXT="val_float"/>
+        <FIELD NAME="val_float" TYPE="number" LENGTH="17" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" DECIMALS="2" PREVIOUS="val_int" NEXT="val_char"/>
+        <FIELD NAME="val_char" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="val_float" NEXT="val_date"/>
+        <FIELD NAME="val_date" TYPE="datetime" NOTNULL="false" SEQUENCE="false" PREVIOUS="val_char" NEXT="obbligatorio"/>
+        <FIELD NAME="obbligatorio" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="false" DEFAULT="1" SEQUENCE="false" PREVIOUS="val_date"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_forzature" COMMENT="f2_forzature table retrofitted from MySQL" PREVIOUS="f2_parametri">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="codice_fiscale"/>
+        <FIELD NAME="codice_fiscale" TYPE="char" LENGTH="16" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="cohort_fk"/>
+        <FIELD NAME="cohort_fk" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="codice_fiscale" NEXT="orgfk_direzione"/>
+        <FIELD NAME="orgfk_direzione" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="cohort_fk" NEXT="matricola"/>
+        <FIELD NAME="matricola" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="orgfk_direzione" NEXT="cognome"/>
+        <FIELD NAME="cognome" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="matricola" NEXT="nome"/>
+        <FIELD NAME="nome" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="cognome" NEXT="sesso"/>
+        <FIELD NAME="sesso" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" PREVIOUS="nome" NEXT="qualifica"/>
+        <FIELD NAME="qualifica" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="sesso" NEXT="ap"/>
+        <FIELD NAME="ap" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" PREVIOUS="qualifica" NEXT="e_mail"/>
+        <FIELD NAME="e_mail" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="ap" NEXT="cod_direzione"/>
+        <FIELD NAME="cod_direzione" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="e_mail" NEXT="direzione"/>
+        <FIELD NAME="direzione" TYPE="char" LENGTH="205" NOTNULL="true" SEQUENCE="false" PREVIOUS="cod_direzione" NEXT="cod_settore"/>
+        <FIELD NAME="cod_settore" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" PREVIOUS="direzione" NEXT="settore"/>
+        <FIELD NAME="settore" TYPE="char" LENGTH="205" NOTNULL="false" SEQUENCE="false" PREVIOUS="cod_settore" NEXT="data_fine"/>
+        <FIELD NAME="data_fine" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false" PREVIOUS="settore" NEXT="nota"/>
+        <FIELD NAME="nota" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" PREVIOUS="data_fine"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

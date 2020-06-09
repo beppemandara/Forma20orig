@@ -1,0 +1,130 @@
+<?php
+/**
+ * $Id: block_f2_apprendimento.php 1140 2013-05-16 15:17:19Z d.lallo $
+ * f2_apprendimento block class
+ *
+ * Extends standard block methods, and defines methods for display,
+ * validation and processing of the form.
+ */
+class block_f2_apprendimento extends block_list {
+
+	/**
+		* Stores the student record during validation and processing
+		*
+		* @var object
+		*/
+	public $student;
+	/**
+		* Stores the event start timestamp during validation and processing
+		*
+		* @var object
+		*/
+	public $timestamp;
+
+	/**
+		* Standard block init method, defines the title
+		*/
+	public function init() {
+			$this->title = get_string('f2_apprendimento','block_f2_apprendimento');
+	}
+
+	/**
+		* Prevent multiple instances of the block on a page
+		* @return boolean
+		*/
+	public function allow_multiple() {
+			return false;
+	}
+
+	/**
+		* Cron job, sends reminder texts once a day
+		*
+		* Runs every hour with block's cron job, but only does anything between 8am and 9am (so
+		* once a day).  Looks for any appoinments happening today, and if there's a valid mobile
+		* number for the student, sends them a reminder via SMS.
+		*/
+	public function cron() {
+	}
+
+	public function get_content() {
+            
+                global $CFG;
+                
+		if ($this->content !== null) {
+			return $this->content;
+		}
+
+		$this->content         = new stdClass;
+		$this->content->items  = array();
+		$this->content->icons  = array();
+		$this->content->footer = '';
+                
+                $blockid = $this->instance->id;
+		
+		if (isloggedin() && $blockid != false) {   // Show the block
+            /*            if(has_capability('local/f2_course:mycourses',get_context_instance(CONTEXT_SYSTEM))) {
+                            $this->content->items[] = html_writer::tag('a', get_string('mycourses'), array('href' => $CFG->wwwroot.'/local/f2_course/mycourses_prog.php'));
+                            $this->content->icons[] = '';
+                        }
+			if(	has_capability('block/f2_apprendimento:viewcurricula',get_context_instance(CONTEXT_SYSTEM)) &&
+				has_capability('block/f2_apprendimento:viewpianodistudi', get_context_instance(CONTEXT_SYSTEM))){
+				$this->content->items[] = html_writer::tag('a', get_string('curriculum','block_f2_apprendimento'), array('href' => $CFG->wwwroot.'/blocks/f2_apprendimento/curricula.php'));
+				$this->content->icons[] = '';
+				}*/
+		/*	if(	has_capability('block/f2_apprendimento:viewdipendenticurricula',get_context_instance(CONTEXT_SYSTEM)) && 
+				has_capability('block/f2_apprendimento:viewpianodistudidipendenti', get_context_instance(CONTEXT_SYSTEM))){*/
+			$blockid = get_block_id(get_string('pluginname_db','block_f2_apprendimento'));
+			//$context = get_context_instance(CONTEXT_BLOCK,$blockid);
+			$context = context_block::instance($blockid);
+			if(	has_capability('block/f2_apprendimento:viewdipendenticurricula',$context) &&
+					has_capability('block/f2_apprendimento:viewpianodistudidipendenti', $context)){
+				$this->content->items[] = html_writer::tag('a', get_string('viewpianodip','block_f2_apprendimento'), array('href' => $CFG->wwwroot.'/blocks/f2_apprendimento/pianodistudi_utenti.php'));
+				$this->content->icons[] = '';
+			}
+			//if ( has_capability('block/f2_apprendimento:viewgestionecorsi',get_context_instance(CONTEXT_BLOCK, $blockid))) {
+			if ( has_capability('block/f2_apprendimento:viewgestionecorsi',context_block::instance($blockid))) {
+				$this->content->items[] = html_writer::tag('a', get_string('managecourse', 'block_f2_apprendimento'), array('href' => $CFG->wwwroot.'/blocks/f2_apprendimento/managecourse_prog.php'));
+				$this->content->icons[] = '';
+			}
+                        //if ( has_capability('block/f2_apprendimento:leggistorico',get_context_instance(CONTEXT_SYSTEM))) {
+                        if ( has_capability('block/f2_apprendimento:leggistorico', context_system::instance())) {
+				$this->content->items[] = html_writer::tag('a', get_string('f2_apprendimento:modificastorico', 'block_f2_apprendimento'), array('href' => $CFG->wwwroot.'/blocks/f2_apprendimento/storico/modifica_storico.php'));
+				$this->content->icons[] = '';
+			}
+// a.a. Modifica per attivare Gestione Crediti Riforma
+// commentato il 2016 01 08
+                        /*if ( has_capability('block/f2_apprendimento:forma2riforma',get_context_instance(CONTEXT_SYSTEM))) {
+				$this->content->items[] = html_writer::tag('a', get_string('f2r_forma2riforma', 'block_f2_apprendimento'), array('href' => $CFG->wwwroot.'/blocks/f2_apprendimento/forma2riforma/elenco_corsi.php'));
+				$this->content->icons[] = '';
+			}*/
+// a.a. Fine modifica per Gestione Crediti Riforma
+		}
+		// Add more list items here
+
+	return $this->content;
+	}
+	/**
+		* Restricts block to course pages
+		*
+		* @see blocks/block_base#applicable_formats()
+		* @return array
+		*/
+	function applicable_formats() {
+		return array('all' => true);
+	}
+	/**
+		* Formats the error messages as HTML.
+		*
+		* @param $errors error messages generated by {@see validate_form()}
+		*/
+	function display_errors($errors) {
+			$this->content->text .= html_writer::start_tag('div', array('class' => "errors"));
+			foreach ($errors as $error) {
+					$this->content->text .= $error.html_writer::empty_tag('br');
+			}
+			$this->content->text .= html_writer::end_tag('div');
+	}
+	
+}
+
+

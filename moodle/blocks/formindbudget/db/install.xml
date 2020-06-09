@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/formindbudget/db" VERSION="20180301" COMMENT="XMLDB file for Moodle blocks/formindbudget"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="block_formindbudget" COMMENT="Tabella di gestione del budget">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false" COMMENT="anno solare di riferimento per il budget della formazione individuale"/>
+        <FIELD NAME="budget" TYPE="number" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false" DECIMALS="2" COMMENT="importo del budget per la formazione individuale"/>
+        <FIELD NAME="inseritoda" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="id utente che ha inserito il budget"/>
+        <FIELD NAME="datainserimento" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false" COMMENT="data in cui il budget è stato inserito"/>
+        <FIELD NAME="modificatoda" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="id utente che effettua la modifica al budget"/>
+        <FIELD NAME="datamodifica" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false" COMMENT="data in cui il valore del budget viene modificato"/>
+        <FIELD NAME="note" TYPE="char" LENGTH="1000" NOTNULL="false" SEQUENCE="false" COMMENT="campo per eventuali note legate al budget"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="block_formindbudget_storico" COMMENT="storico">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="annoriferimento" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="valorebudget" TYPE="number" LENGTH="20" NOTNULL="false" DEFAULT="0" SEQUENCE="false" DECIMALS="2" COMMENT="valore del budget impostato in precedenza"/>
+        <FIELD NAME="inseritoda" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="id utente che ha effettuato l'inserimento"/>
+        <FIELD NAME="datainserimento" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false" COMMENT="data in cui il budget viene inserito"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="block_formindbudget_log" COMMENT="Tabella di log">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="azione" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT="Azione effettuata"/>
+        <FIELD NAME="data" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false" COMMENT="Data log"/>
+        <FIELD NAME="msg" TYPE="char" LENGTH="200" NOTNULL="false" SEQUENCE="false" COMMENT="Messaggio di log"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

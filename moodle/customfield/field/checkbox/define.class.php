@@ -1,0 +1,14 @@
+<?php  // $Id: define.class.php 34 2012-08-28 12:30:08Z c.arnolfo $
+
+class customfield_define_checkbox extends customfield_define_base {
+
+    function define_form_specific(&$form) {
+        /// select whether or not this should be checked by default
+        $form->addElement('selectyesno', 'defaultdata', get_string('defaultchecked', 'customfields'));
+        $form->setDefault('defaultdata', 0); // defaults to 'no'
+        $form->setType('defaultdata', PARAM_BOOL);
+        $form->setHelpButton('defaultdata', array('customfielddefaultdatacheckbox', get_string('defaultchecked', 'customfields')), true);
+    }
+}
+
+?>

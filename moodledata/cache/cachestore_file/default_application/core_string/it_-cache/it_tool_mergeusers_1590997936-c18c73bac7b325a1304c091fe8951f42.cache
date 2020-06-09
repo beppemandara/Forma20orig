@@ -1,0 +1,71 @@
+a:78:{s:10:"pluginname";s:19:"Merge user accounts";s:6:"header";s:37:"Merge two users into a single account";s:11:"header_help";s:374:"<p>Given a user to be deleted and a user to keep, this will merge the user data
+ associated with the former user into the latter user. Note that both users must
+ already exist and no accounts will actually be deleted. That process is left to the
+ administrator to do manually.</p>
+ <p><strong>Only do this if you know what you are doing as it is not reversable!</strong></p>";s:17:"usermergingheader";s:49:"&laquo;{$a->username}&raquo; (user ID = {$a->id})";s:13:"errorsameuser";s:29:"Trying to merge the same user";s:10:"mergeusers";s:19:"Merge user accounts";s:21:"mergeusers:mergeusers";s:19:"Merge user accounts";s:7:"merging";s:6:"Merged";s:4:"into";s:4:"into";s:9:"newuserid";s:18:"User ID to be kept";s:9:"olduserid";s:21:"User ID to be removed";s:15:"mergeusers:view";s:19:"Merge User Accounts";s:7:"tableok";s:22:"Table {$a} : update OK";s:7:"tableko";s:27:"Table {$a} : update NOT OK!";s:5:"logok";s:51:"Here are the queries that have been sent to the DB:";s:5:"logko";s:20:"Some error occurred:";s:5:"logid";s:69:"For further reference, these results are recorded in the log id {$a}.";s:4:"dbok";s:16:"Merge successful";s:17:"dbko_transactions";s:218:"<strong>Merge failed!</strong> <br/>Your database engine
+    supports transactions. Therefore, the whole current transaction has been rolled back
+    and <strong>no modification has been made to your database</strong>.";s:20:"dbko_no_transactions";s:498:"<strong>Merge failed!</strong> <br/>Your database engine
+    does not support transactions. Therefore, your database <strong>has been updated</strong>.
+    Your database status may be inconsistent. <br/>But, take a look at the merging log
+    and, please, inform about the error to plugin developers. You will get a solution
+    in short time. After updating the plugin to its last version, which will include the solution
+    to that problem, repeat the merging action to complete it with success.";s:12:"tableskipped";s:161:"For logging or security reasons we are skipping <strong>{$a}</strong>.
+ <br />To remove these entries, delete the old user once this script has run successfully.";s:13:"errordatabase";s:40:"Error: Database type {$a} not supported.";s:11:"invaliduser";s:12:"Invalid user";s:24:"cligathering:description";s:222:"Introduce pairs of user's id to merge the first one into the
+
+second one. The first user id (fromid) will 'lose' all its data to be 'migrated'
+
+into the second one (toid). The user 'toid' will include data from both users.";s:21:"cligathering:stopping";s:67:"To stop merging, Ctrl+C or type -1 either on fromid or toid fields.";s:19:"cligathering:fromid";s:24:"Source user id (fromid):";s:17:"cligathering:toid";s:24:"Target user id   (toid):";s:7:"viewlog";s:16:"See merging logs";s:7:"loglist";s:68:"All these records are merging actions done, showing if they went ok:";s:14:"newuseridonlog";s:9:"User kept";s:14:"olduseridonlog";s:12:"User removed";s:6:"nologs";s:43:"There is no merging logs yet. Good for you!";s:10:"wronglogid";s:42:"The log you are asking for does not exist.";s:7:"deleted";s:29:"User with ID {$a} was deleted";s:21:"errortransactionsonly";s:212:"Error: transactions are required, but your database type {$a}
+    does not support them. If needed, you can allow merging users without transactions.
+    Please, review plugin settings to set up them accordingly.";s:22:"eventusermergedsuccess";s:15:"Merging success";s:22:"eventusermergedfailure";s:12:"Merge failed";s:20:"transactions_setting";s:25:"Only transactions allowed";s:25:"transactions_setting_desc";s:692:"If enabled, merge users will not work
+    at all on databases that do NOT support transactions (recommended).
+    Enabling it is necessary to ensure that your database remains consistent
+    in case of merging errors. <br />If disabled, you will always run merging actions.
+    In case of errors, the merging log will show you what was the problem.
+    Reporting it to the plugin supporters will give you a solution in short.
+    <br />Above all, core Moodle tables and some third party plugins are already
+    considered by this plugin. If you do not have any third party plugins
+    in your Moodle installation, you can be quiet on running this plugin
+    enabling or disabling this option.";s:22:"transactions_supported";s:79:"For your information, your database
+    <strong>supports transactions</strong>.";s:26:"transactions_not_supported";s:88:"For your information, your database
+    <strong>does not supports transactions</strong>.";s:19:"excluded_exceptions";s:18:"Exclude exceptions";s:24:"excluded_exceptions_desc";s:415:"Experience on this subject suggests
+    that all these database tables should be excluded from merging. See
+    README for more details. <br>
+    Therefore, for applying default plugin behaviour, you need to choose '{$a}'
+    to exclude all those tables from the merging process (recommended).<br>
+    If you prefer, you can exclude any of those tables and include them in the
+    merging process (not recommended).";s:12:"choose_users";s:21:"Choose users to merge";s:12:"review_users";s:22:"Confirm users to merge";s:7:"results";s:23:"Merging results and log";s:11:"form_header";s:19:"Find users to merge";s:16:"form_description";s:215:"<p>You may search for users here if you don't
+    know the user's username/id number. Otherwise you may expand the form to
+    enter that information directly.  Please see help on fields for more
+    information</p>";s:10:"searchuser";s:15:"Search for User";s:15:"searchuser_help";s:174:"Enter a username, first/last name, email address
+    or user id to search for potential users. You may also specify if you only
+    want to search through a particular field.";s:18:"mergeusersadvanced";s:34:"<strong>Direct user input</strong>";s:23:"mergeusersadvanced_help";s:209:"Here you can enter the below fields if
+    you know exactly what users that you want to merge.<br /><br />
+    Click the "search" button in order to verify/confirm that the input entered
+    are in fact users.";s:18:"mergeusers_confirm";s:141:"After confirming the merge process will start.
+    <br /><strong>This will not be reversible!</strong>
+    Are you sure you want to continue?";s:15:"clear_selection";s:28:"Clear current user selection";s:7:"olduser";s:14:"User to remove";s:7:"newuser";s:12:"User to keep";s:20:"saveselection_submit";s:14:"Save selection";s:22:"userselecttable_legend";s:28:"<b>Select users to merge</b>";s:22:"userreviewtable_legend";s:28:"<b>Review users to merge</b>";s:12:"error_return";s:21:"Return to search form";s:16:"no_saveselection";s:45:"You did not select either an old or new user.";s:14:"invalid_option";s:19:"Invalid form option";s:19:"suspenduser_setting";s:16:"Suspend old user";s:24:"suspenduser_setting_desc";s:256:"If enabled, it suspends the old user
+    automatically upon a succesful merging process, preventing the user
+    from logging in Moodle (recommended). If disabled, the old user remains active.
+    In both cases, old user will not have his/her related data.";s:18:"quizattemptsaction";s:28:"How to resolve quiz attempts";s:23:"quizattemptsaction_desc";s:1335:"When merging quiz attempts there may exist three cases:
+    <ol>
+    <li>Only the old user has quiz attempts. All attemps will appear as if they were made by the new user.</li>
+    <li>Only the new user has quiz attempts. All is correct and nothing is done.</li>
+    <li>Both users have attempts for the same quiz. <strong>You have to choose what to do in this case of conflict.
+    </strong>. You are required to choose one of the following actions:
+        <ul>
+        <li><strong>{$a->renumber}</strong>. Attempts from the old user are merged with the ones of the new user
+        and renumbered by the time they were started.</li>
+        <li><strong>{$a->delete_fromid}</strong>. Attempts from the old user are removed. Attempts from the new user
+        are kept, since this option considers them as the most important.</li>
+        <li><strong>{$a->delete_toid}</strong>. Attempts from the new user are removed. Attempts from
+        the old user are kept, since this option considers them as the most important.</li>
+        <li><strong>{$a->remain}</strong> (by default). Attempts are not merged nor deleted, remaining related to
+        the user who made them. This is the most secure action, but merging users from user A to user B or B to A may
+        produce different quiz grades.</li>
+        </ul>
+    </li>
+    </ol>";s:18:"qa_action_renumber";s:43:"Merge attempts from both users and renumber";s:23:"qa_action_delete_fromid";s:31:"Keep attempts from the new user";s:21:"qa_action_delete_toid";s:31:"Keep attempts from the old user";s:16:"qa_action_remain";s:35:"Do nothing: do not merge nor delete";s:20:"qa_action_remain_log";s:59:"User data from table <strong>{$a}</strong> are not updated.";s:16:"qa_chosen_action";s:38:"Active option for quiz attempts: {$a}.";s:9:"qa_grades";s:38:"Grades recalculated for quizzes: {$a}.";s:24:"uniquekeynewidtomaintain";s:20:"Keep new user's data";s:29:"uniquekeynewidtomaintain_desc";s:297:"In case of conflict, 
+    like when the user.id related column is a unique key, this plugin will keep 
+    data from new user (by default). This also means that data from old user is 
+    deleted to keep the consistence. Otherwise, if you uncheck this option, 
+    data from old user will be kept.";s:9:"starttime";s:23:"Started merging at {$a}";s:10:"finishtime";s:24:"Finished merging at {$a}";s:9:"timetaken";s:23:"Merge took {$a} seconds";}

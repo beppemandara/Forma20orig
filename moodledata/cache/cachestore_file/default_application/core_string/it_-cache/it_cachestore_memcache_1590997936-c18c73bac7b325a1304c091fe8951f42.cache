@@ -1,0 +1,10 @@
+a:9:{s:10:"pluginname";s:8:"Memcache";s:6:"prefix";s:15:"Prefisso chiave";s:11:"prefix_help";s:273:"Il prefisso da usare per tutti nomi delle chiavi nel server memcache.
+* se il server ospita una singola istanza Moodle, è possibile lasciare il nome al suo default
+* a causa di limitazioni sulla lunghezza delle chiavi, il prefisso può essere lungo al massimo 5 caratteri.";s:13:"prefixinvalid";s:64:"Prefisso non valido. E' possibile usare solamente a-z A-Z 0-9-_.";s:7:"servers";s:6:"Server";s:12:"servers_help";s:360:"Imposta i server usati dall'adapter memcache.
+I server devono essere definiti usando una linea per ciascun server contenente obbligatoriamente l'indirizzo e opzionalmente la porta ed il peso. In assenza di indicazione sulla porta da usare sarà utilizzata la porta di default (11211).
+
+Esempio:
+<pre> server.url.com
+ipaddress:porta
+nomeserver:porta:peso
+</pre>";s:22:"sessionhandlerconflict";s:194:"Attenzione: l'istanza memcache ({$a}) è stata configurata per usare lo stesso server memcached usato per le sessioni. Lo svuotamento delle cache provocherà anche l'eliminazione delle sessioni.";s:11:"testservers";s:11:"Test server";s:16:"testservers_desc";s:230:"Una più stringhe di connessione ad un server memcache da utilizzare per test. Il server di test consente di provare le prestazioni della cache memcache tramite la pagina amministrativa "Test prestazioni". Esempio: 127.0.0.1:11211";}

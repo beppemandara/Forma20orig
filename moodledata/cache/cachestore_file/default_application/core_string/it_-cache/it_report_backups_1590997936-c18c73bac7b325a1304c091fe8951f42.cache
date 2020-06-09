@@ -1,0 +1,1 @@
+a:7:{s:18:"backupofcourselogs";s:22:"Log del backup di {$a}";s:22:"logsofbackupexecutedon";s:33:"Log del backup effettuato il {$a}";s:14:"nobackupsfound";s:30:"Non sono stati trovati backup.";s:11:"nologsfound";s:44:"Non sono stati trovati log di questo backup.";s:10:"pluginname";s:17:"Report dei backup";s:12:"strftimetime";s:8:"%H:%M:%S";s:8:"viewlogs";s:14:"Visualizza log";}

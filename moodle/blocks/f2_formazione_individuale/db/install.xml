@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/community/db" VERSION="20161028" COMMENT="XMLDB file for Moodle blocks/f2_formazione_individuale"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="f2_fi_partialbudget" COMMENT="Formazione Individuale budget da approvare">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="orgfk"/>
+        <FIELD NAME="orgfk" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="anno" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="orgfk" NEXT="money_bdgt"/>
+        <FIELD NAME="money_bdgt" TYPE="float" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="tipo" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="money_bdgt" NEXT="usrname"/>
+        <FIELD NAME="usrname" TYPE="char" LENGTH="90" NOTNULL="true" SEQUENCE="false" PREVIOUS="lstupd"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="mdl_f2orgbudg_annorgtip_uix"/>
+        <KEY NAME="mdl_f2orgbudg_annorgtip_uix" TYPE="unique" FIELDS="anno, orgfk, tipo" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

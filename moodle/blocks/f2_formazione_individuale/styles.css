@@ -1,0 +1,14 @@
+input.hidden {
+    width: 0px;
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+    border: 0px;
+    position: absolute; 
+    left: -100%;
+}
+input.btnapprove {
+    float: left;
+    margin-right: 5px;
+}

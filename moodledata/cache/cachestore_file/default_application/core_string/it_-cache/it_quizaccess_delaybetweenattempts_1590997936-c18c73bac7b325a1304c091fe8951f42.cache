@@ -1,0 +1,1 @@
+a:3:{s:10:"pluginname";s:45:"Regola di accesso quiz Ritardo tra  tentativi";s:13:"youcannotwait";s:62:"Il quiz chiude prima che tu possa iniziare un altro tentativo.";s:11:"youmustwait";s:91:"Devi aspettare prima di poter ritentare questo quiz. Potrai tentarlo di nuovo dopo il {$a}.";}

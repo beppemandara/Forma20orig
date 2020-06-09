@@ -1,0 +1,1 @@
+a:5:{s:12:"contextlevel";s:19:"Livello di contesto";s:5:"count";s:6:"Numero";s:13:"confirmdelete";s:122:"Sei sicuro di eliminare tutte le assegnazioni non supportate del ruolo "{$a->role}" nel livello di contesto "{$a->level}"?";s:10:"noprolbems";s:59:"Non sono state trovate assegnazioni di ruolo non supportate";s:10:"pluginname";s:36:"Assegnazioni di ruolo non supportate";}

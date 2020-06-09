@@ -1,0 +1,105 @@
+/* GENERALI */
+a {
+	text-decoration: none;
+}
+h2.main {
+    color: #386A85;
+    font-size: 26pt;
+    font-weight: normal;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+h2.headingblock {
+	font-size: 26pt;
+	margin-top: 0;
+	color: #386A85;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+/* HEADER */
+#region-top {
+	background: #00B777 url([[pix:theme|/freccia_top]]) no-repeat top left;
+	height: 46px;
+	margin-bottom: 20px;
+	border-bottom: 1px dashed #FFF;
+	position: relative;
+}
+.logininfo {
+	width: 150px;
+	margin-top: 10px;
+	color: #243F52;
+	font-weight: bold;
+	font-size: 12px;
+	margin-left: 130px;
+	float: left;
+}
+.logininfo a {
+	color: #F6FF02;
+}
+/* TESTATA */
+h1.headermain {
+	color: #000;
+	background: url([[pix:theme|/logo]]) no-repeat top left;
+	width: 350px;
+	height: 82px;
+	margin: 0;
+}
+h1 a {
+	display: block;
+	height: 69px;
+	margin-left: 1px;
+	width: 348px;
+}
+h1.headermain strong {
+	display: none;
+}
+#region-dxheader p {
+	font-size: 20px;
+	line-height: 20px;
+	color: #386A85;
+	margin-left: 50px;
+	margin-top: 10px;
+}
+#region-dxheader .block {
+	border: none;
+}
+/*BREDCREUMBS*/
+.navbar {
+	display: none;
+}
+
+/*FOOTER*/	 
+	 
+#page-footer {
+	clear: both;
+	padding-top: 10px;
+	border-top: 13px solid #00B777;
+	text-align: left;
+	margin-bottom: 10px;
+}
+#page-footer ul {
+	margin: 0;
+}
+#page-footer ul li {
+	list-style: none;
+	display: inline;
+}
+#page-footer ul li a {
+	display: block;
+	width: 100px;
+	height: 35px;
+	float: left;
+	margin-right: 20px;
+}
+#page-footer ul li a#banner_RP {
+	background: url([[pix:theme|/logo_RP]]) no-repeat top left;
+}
+#page-footer ul li a#banner_CRP {
+	background: url([[pix:theme|/logo_CRP]]) no-repeat top left;
+}
+#page-footer ul li a#banner_CSI {
+	background: url([[pix:theme|/logo_CSI]]) no-repeat top left;
+}
+#page-footer ul li a strong {
+	display: none;
+}

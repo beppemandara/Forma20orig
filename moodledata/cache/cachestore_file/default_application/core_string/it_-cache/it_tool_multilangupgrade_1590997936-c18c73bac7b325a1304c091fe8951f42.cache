@@ -1,0 +1,3 @@
+a:2:{s:20:"multilangupgradeinfo";s:292:"<p>La sintassi del filtro multilingua è stata cambiata nella versione 1.8, la sintassi <lang> non è più supportata.</p>
+<p>Esempio: <span lang="en" class="multilang">Hello!</span><span lang="es" class="multilang">Hola!</span></p>
+<p>Vuoi aggiornare adesso la sintassi in tutti i testi?</p>";s:10:"pluginname";s:26:"Aggiornamento multi lingua";}

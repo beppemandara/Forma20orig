@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/f2_prenotazioni/db" VERSION="20121025" COMMENT="XMLDB file for Moodle blocks/f2_prenotazioni"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="f2_prenotati" COMMENT="f2_prenotati table retrofitted from MySQL" NEXT="f2_stati_validazione">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="anno" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="courseid" NEXT="orgid"/>
+        <FIELD NAME="orgid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="dominio primario utente" PREVIOUS="userid" NEXT="data_prenotazione"/>
+        <FIELD NAME="data_prenotazione" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="timestamp data" PREVIOUS="orgid" NEXT="validato_sett"/>
+        <FIELD NAME="validato_sett" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="data_prenotazione" NEXT="cf"/>
+        <FIELD NAME="cf" TYPE="number" LENGTH="5" NOTNULL="true" UNSIGNED="false" DEFAULT="0.00" SEQUENCE="false" DECIMALS="2" COMMENT="riporta il credito formativo del corso" PREVIOUS="validato_sett" NEXT="sfid"/>
+        <FIELD NAME="sfid" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="riporta il segmento formativo del corso" PREVIOUS="cf" NEXT="costo"/>
+        <FIELD NAME="costo" TYPE="number" LENGTH="17" NOTNULL="true" UNSIGNED="false" DEFAULT="0.00" SEQUENCE="false" DECIMALS="2" COMMENT="riporta il costo in euro del corso" PREVIOUS="sfid" NEXT="durata"/>
+        <FIELD NAME="durata" TYPE="number" LENGTH="5" NOTNULL="true" UNSIGNED="false" DEFAULT="0.00" SEQUENCE="false" DECIMALS="2" COMMENT="riporta la durata del corso in giorni (costo in giorni)" PREVIOUS="costo" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="timestamp last update della prenotazione" PREVIOUS="durata" NEXT="usrname"/>
+        <FIELD NAME="usrname" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" COMMENT="username ultima modifica prenotazione" PREVIOUS="lstupd" NEXT="sede"/>
+        <FIELD NAME="sede" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="usrname" NEXT="validato_dir"/>
+        <FIELD NAME="validato_dir" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="sede" NEXT="val_sett_by"/>
+        <FIELD NAME="val_sett_by" TYPE="int" LENGTH="20" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="'validazione settore effettuata da (userid)" PREVIOUS="validato_dir" NEXT="val_sett_dt"/>
+        <FIELD NAME="val_sett_dt" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="validazione settore effettuata in timestamp" PREVIOUS="val_sett_by" NEXT="val_dir_by"/>
+        <FIELD NAME="val_dir_by" TYPE="int" LENGTH="20" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="validazione direzione effettuata da (userid)" PREVIOUS="val_sett_dt" NEXT="val_dir_dt"/>
+        <FIELD NAME="val_dir_dt" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="validazione direzione effettuata in timestamp" PREVIOUS="val_dir_by" NEXT="isdeleted"/>
+        <FIELD NAME="isdeleted" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="0- default, 1 - prenotazione annullata" PREVIOUS="val_dir_dt"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="uk_anno-courseid-userid-prenotati" TYPE="unique" FIELDS="anno, courseid, userid" NEXT="prenotati_pk"/>
+        <KEY NAME="prenotati_pk" TYPE="primary" FIELDS="id" PREVIOUS="uk_anno-courseid-userid-prenotati"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_courseid_userid-prenotati" UNIQUE="false" FIELDS="courseid, userid" NEXT="idx_userid_anno-prenotati"/>
+        <INDEX NAME="idx_userid_anno-prenotati" UNIQUE="false" FIELDS="userid, anno" PREVIOUS="idx_courseid_userid-prenotati" NEXT="idx_anno_validato_sett-prenotati"/>
+        <INDEX NAME="idx_anno_validato_sett-prenotati" UNIQUE="false" FIELDS="anno, validato_sett" PREVIOUS="idx_userid_anno-prenotati" NEXT="idx_anno_validato_dir-prenotati"/>
+        <INDEX NAME="idx_anno_validato_dir-prenotati" UNIQUE="false" FIELDS="anno, validato_dir" PREVIOUS="idx_anno_validato_sett-prenotati" NEXT="idx_anno_courseid_userid-prenotati"/>
+        <INDEX NAME="idx_anno_courseid_userid-prenotati" UNIQUE="false" FIELDS="anno, courseid, userid" PREVIOUS="idx_anno_validato_dir-prenotati" NEXT="fk_sede-prenotati"/>
+        <INDEX NAME="fk_sede-prenotati" UNIQUE="false" FIELDS="sede" PREVIOUS="idx_anno_courseid_userid-prenotati" NEXT="idx_isdeleted_prenotati"/>
+        <INDEX NAME="idx_isdeleted_prenotati" UNIQUE="false" FIELDS="isdeleted" PREVIOUS="fk_sede-prenotati"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="f2_stati_validazione" COMMENT="f2_stati_validazione table retrofitted from MySQL" PREVIOUS="f2_prenotati">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="orgid"/>
+        <FIELD NAME="orgid" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="stato_validaz_sett"/>
+        <FIELD NAME="stato_validaz_sett" TYPE="char" LENGTH="1" NOTNULL="true" DEFAULT="A" SEQUENCE="false" COMMENT="A - settore non validato o in fase di modifica (valore iniziale); B - settore validato dal capo setore ma non validato dal ref di direzione; C - settore validato sia dal capo settore che dal ref di direzione" PREVIOUS="orgid" NEXT="stato_validaz_dir"/>
+        <FIELD NAME="stato_validaz_dir" TYPE="char" LENGTH="1" NOTNULL="true" DEFAULT="A" SEQUENCE="false" COMMENT="A - direzione non validata (valore iniziale); B - uno o piu settori ancora da validare; C - direzione validata, non effettuata verifica budget; D - direzione validata, budget non rispettato; E - direzione validata, budget rispettato" PREVIOUS="stato_validaz_sett" NEXT="anno"/>
+        <FIELD NAME="anno" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="stato_validaz_dir"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="uk_anno_org-stati_validazione" TYPE="unique" FIELDS="anno, orgid" NEXT="stato_validazione_pk"/>
+        <KEY NAME="stato_validazione_pk" TYPE="primary" FIELDS="id" PREVIOUS="uk_anno_org-stati_validazione"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_anno-stati_validazione" UNIQUE="false" FIELDS="anno" NEXT="idx_orgid-stati_validazione_org"/>
+        <INDEX NAME="idx_orgid-stati_validazione_org" UNIQUE="false" FIELDS="orgid" PREVIOUS="idx_anno-stati_validazione"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

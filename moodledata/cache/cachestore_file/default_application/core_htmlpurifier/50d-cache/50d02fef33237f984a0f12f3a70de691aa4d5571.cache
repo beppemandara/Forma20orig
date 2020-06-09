@@ -1,0 +1,10 @@
+s:1115:"<p>Un oggetto SCORM è un insieme di file impacchettati secondo uno standard riconosciuto per la realizzazione di learning object. Il modulo di attività SCORM consente l'utilizzo di pacchetti in formato .zip basati sugli standard SCORM e AICC.</p>
+
+<p>In genere il contenuto di un pacchetto viene visualizzato su diverse pagine, con la possibilità di navigarle. E' possibile impostare il pacchetto per visualizzare il contenuto in finestre pop up, con l'indice dei contenuti, con i pulsanti di navigazione, eccetera. Gli oggetti SCORM possono anche presentare delle domande i cui risultati saranno memorizzati nel registro del valutatore.</p>
+
+<p>E' possibile usare attività SCORM per:</p>
+
+<ul><li>Presentare contenuti multimediali ed animazioni</li>
+<li>Valutare le attività degli studenti</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/scorm/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

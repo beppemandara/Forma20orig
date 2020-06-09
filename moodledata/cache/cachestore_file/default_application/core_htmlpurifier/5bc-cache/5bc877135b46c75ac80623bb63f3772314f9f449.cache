@@ -1,0 +1,8 @@
+s:974:"<p>Il modulo URL consente ai docenti di inserire link web come risorse del corso. E' possibile creare link verso qualsiasi URL liberamente disponibile online, copiando ed incollando l'URL, oppure scegliendo un file da repository come Flickr, youtube o Wikimedia tramite il file picker (in funzione del repository attivi nel sito).</p>
+
+<p>Sono disponibili molte opzioni di visualizzazione per aprire l'URL, ad esempio in una finestra popup oppure incorporandola, ed anche opzioni avanzate per inviare all'URL parametri come il nome dello studente.</p>
+
+<p>Da notare che è possibile aggiungere URL ad altri tipi di risorse o attività tramite l'editor di testo.</p>
+
+<div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/url/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

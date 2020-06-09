@@ -1,0 +1,1 @@
+a:4:{s:10:"buffersize";s:27:"Dimensione buffer scrittura";s:10:"pluginname";s:12:"Log standard";s:15:"pluginname_desc";s:73:"Plugin che memorizza i dati di log in una tabella del database di Moodle.";s:11:"taskcleanup";s:19:"Pulizia tabella log";}

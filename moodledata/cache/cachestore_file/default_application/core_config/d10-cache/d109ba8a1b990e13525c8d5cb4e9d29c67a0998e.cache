@@ -1,0 +1,12 @@
+a:2:{s:7:"toolbar";s:345:"collapse = collapse
+style1 = title, bold, italic
+list = unorderedlist, orderedlist
+links = link
+files = image, media, managefiles
+style2 = underline, strike, subscript, superscript
+align = align
+indent = indent
+insert = equation, charmap, table, clear
+undo = undo
+accessibility = accessibilitychecker, accessibilityhelper
+other = html";s:7:"version";s:10:"2014051200";}

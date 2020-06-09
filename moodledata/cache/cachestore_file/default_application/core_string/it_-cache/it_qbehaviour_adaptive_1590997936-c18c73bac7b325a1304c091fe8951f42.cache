@@ -1,0 +1,10 @@
+a:12:{s:25:"disregardedwithoutpenalty";s:73:"La risposta non è valida, è stata ignorata senza dar luogo a penalità.";s:14:"gradingdetails";s:47:"Punteggio di questo invio: {$a->raw}/{$a->max}.";s:28:"gradingdetailswithadjustment";s:133:"Punteggio di questo invio: {$a->raw}/{$a->max}.
+Considerando i tentativi precedenti, si ottiene <strong>{$a->cur}/{$a->max}</strong>.";s:35:"gradingdetailswithadjustmentpenalty";s:176:"Punteggio di questo invio: {$a->raw}/{$a->max}.
+Considerando i tentativi precedenti, si ottiene <strong>{$a->cur}/{$a->max}</strong>.
+L'invio ha ricevuto una penalità di {$a}.";s:40:"gradingdetailswithadjustmenttotalpenalty";s:227:"Punteggio di questo invio: {$a->raw}/{$a->max}.
+Considerando i tentativi precedenti, si ottiene <strong>{$a->cur}/{$a->max}</strong>.
+L'invio ha ricevuto una penalità di {$a->penalty}.
+Penalità accumulate: {$a->totalpenalty}.";s:25:"gradingdetailswithpenalty";s:99:"Punteggio di questo invio: {$a->raw}/{$a->max}.
+L'invio ha ricevuto una penalità di {$a->penalty}.";s:30:"gradingdetailswithtotalpenalty";s:141:"Punteggio di questo invio: {$a->raw}/{$a->max}.
+L'invio ha ricevuto una penalità di {$a->penalty}.
+Penalità accumulate: {$a->totalpenalty}.";s:11:"notcomplete";s:17:"Risposta mancante";s:10:"pluginname";s:15:"Modo adattativo";s:24:"gradingdetailsadjustment";s:85:"Considerando i tentativi precedenti, si ottiene <strong>{$a->cur}/{$a->max}</strong>.";s:21:"gradingdetailspenalty";s:42:"L'invio ha ricevuto una penalità di {$a}.";s:26:"gradingdetailspenaltytotal";s:27:"Penalità accumulate: {$a}.";}

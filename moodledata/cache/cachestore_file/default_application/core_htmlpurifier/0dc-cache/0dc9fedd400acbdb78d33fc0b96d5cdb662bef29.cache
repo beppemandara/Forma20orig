@@ -1,0 +1,14 @@
+s:1568:"<p>Il modulo attività database consente ai partecipanti di creare, gestire e ricercare insiemi di record. Il formato e la struttura dei record è impostato liberamente dal docente e può includere caselle di spunta, pulsanti radio, menu a discesa, immagini, file, URL, numeri, testi, eccetera.</p>
+
+<p>L'impaginazione delle informazioni per le viste singola, ad elenco e modifica, possono essere impostate attraverso modelli. Le attività Database possono essere condivise tra corsi diversi tramite le preimpostazioni ed è anche possibile esportare ed importare record.</p>
+
+<p>Nel caso in cui il filtro Link automatici al database sia attivo, verrà creato un link tutte le volte che il contenuto di un campo comparirà nei testi del corso.</p>
+
+<p>Un docente può consentire i commenti e la valutazione dei record, anche da parte degli stessi studenti (valutazione tra pari). Le valutazioni possono essere aggregate e la valutazione finale sarà memorizzata nel registro del valutatore.</p>
+
+<p>E' possibile usare l'attività Database per:</p>
+
+<ul><li>una collezione collaborativa di link web, libri, recensioni, articoli, eccetera</li>
+<li>visualizzare lavori degli studenti (fotografie, poster, siti web, eccetera) per la valutazione tra pari</li>
+</ul><div class="helpdoclink"><a href="http://docs.moodle.org/27/it/mod/data/view" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/f2_notif/db" VERSION="20121026" COMMENT="XMLDB file for Moodle local/f2_notif"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_f2_notif" COMMENT="Default comment for local_f2_notif, please edit me" NEXT="f2_notif_tipo">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_notif_tipo" COMMENT="f2_notif_tipo table retrofitted from MySQL" PREVIOUS="local_f2_notif" NEXT="f2_notif_templates">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="nome"/>
+        <FIELD NAME="nome" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="segnaposto"/>
+        <FIELD NAME="segnaposto" TYPE="char" LENGTH="800" NOTNULL="true" SEQUENCE="false" PREVIOUS="nome"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_notif_templates" COMMENT="f2_notif_templates table retrofitted from MySQL" PREVIOUS="f2_notif_tipo" NEXT="f2_notif_corso">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="title"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="256" NOTNULL="false" SEQUENCE="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="title" NEXT="subject"/>
+        <FIELD NAME="subject" TYPE="char" LENGTH="150" NOTNULL="false" SEQUENCE="false" PREVIOUS="description" NEXT="message"/>
+        <FIELD NAME="message" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="subject" NEXT="id_tipo_notif"/>
+        <FIELD NAME="id_tipo_notif" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="message" NEXT="stato"/>
+        <FIELD NAME="stato" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" COMMENT="1 se attivo, 0 se non attivo, -1 se cancellato" PREVIOUS="id_tipo_notif" NEXT="lstupd"/>
+        <FIELD NAME="lstupd" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="stato" NEXT="usrname"/>
+        <FIELD NAME="usrname" TYPE="char" LENGTH="90" NOTNULL="true" SEQUENCE="false" PREVIOUS="lstupd" NEXT="canale"/>
+        <FIELD NAME="canale" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="0 se aula, 1 se on-line" PREVIOUS="usrname" NEXT="predefinito"/>
+        <FIELD NAME="predefinito" TYPE="int" LENGTH="2" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="Default" PREVIOUS="canale"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_notif_corso" COMMENT="f2_notif_corso table retrofitted from MySQL" PREVIOUS="f2_notif_templates" NEXT="f2_notif_template_mailqueue">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="id_corso"/>
+        <FIELD NAME="id_corso" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="id_edizione"/>
+        <FIELD NAME="id_edizione" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id_corso" NEXT="id_notif_templates"/>
+        <FIELD NAME="id_notif_templates" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id_edizione" NEXT="id_tipo_notif"/>
+        <FIELD NAME="id_tipo_notif" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id_notif_templates"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id_corso" TYPE="unique" FIELDS="id_corso, id_edizione, id_tipo_notif" NEXT="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" PREVIOUS="id_corso"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_notif_template_mailqueue" COMMENT="f2_notif_template_mailqueue table retrofitted from MySQL" PREVIOUS="f2_notif_corso" NEXT="f2_notif_template_log">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="sessionid"/>
+        <FIELD NAME="sessionid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="useridfrom"/>
+        <FIELD NAME="useridfrom" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="sessionid" NEXT="useridto"/>
+        <FIELD NAME="useridto" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="useridfrom" NEXT="mailfrom"/>
+        <FIELD NAME="mailfrom" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="useridto" NEXT="mailto"/>
+        <FIELD NAME="mailto" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailfrom" NEXT="mailcc"/>
+        <FIELD NAME="mailcc" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailto" NEXT="mailbcc"/>
+        <FIELD NAME="mailbcc" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailcc" NEXT="subject"/>
+        <FIELD NAME="subject" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailbcc" NEXT="message"/>
+        <FIELD NAME="message" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="subject" NEXT="attachment"/>
+        <FIELD NAME="attachment" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="message" NEXT="format"/>
+        <FIELD NAME="format" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" PREVIOUS="attachment" NEXT="time"/>
+        <FIELD NAME="time" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="format" NEXT="mailtemplate"/>
+        <FIELD NAME="mailtemplate" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="time" NEXT="skip"/>
+        <FIELD NAME="skip" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="mailtemplate"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_notif_template_log" COMMENT="f2_notif_template_log table retrofitted from MySQL" PREVIOUS="f2_notif_template_mailqueue">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="sessionid"/>
+        <FIELD NAME="sessionid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="useridfrom"/>
+        <FIELD NAME="useridfrom" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="sessionid" NEXT="useridto"/>
+        <FIELD NAME="useridto" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="useridfrom" NEXT="mailfrom"/>
+        <FIELD NAME="mailfrom" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="useridto" NEXT="mailto"/>
+        <FIELD NAME="mailto" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailfrom" NEXT="mailcc"/>
+        <FIELD NAME="mailcc" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailto" NEXT="mailbcc"/>
+        <FIELD NAME="mailbcc" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailcc" NEXT="subject"/>
+        <FIELD NAME="subject" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="mailbcc" NEXT="message"/>
+        <FIELD NAME="message" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" PREVIOUS="subject" NEXT="attachment"/>
+        <FIELD NAME="attachment" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="message" NEXT="format"/>
+        <FIELD NAME="format" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" PREVIOUS="attachment" NEXT="time"/>
+        <FIELD NAME="time" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="format" NEXT="mailtemplate"/>
+        <FIELD NAME="mailtemplate" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="time"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

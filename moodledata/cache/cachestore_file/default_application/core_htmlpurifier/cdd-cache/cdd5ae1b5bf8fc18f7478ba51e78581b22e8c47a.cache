@@ -1,0 +1,15 @@
+s:970:"<p>L'attività H5P consente di creare contenuto interattivo come Video interattivi,
+insiemi di domande, domande di tipo Drag and Drop, domande a scelta multipla, Presentazioni e molto altro.</p>
+
+<p>Oltre ad essere uno strumento per la creazione di contenuto,
+H5P consente di riutilizzare e condividere contenuto
+grazie alla possibilità di importare ed esportare files in formato H5P.</p>
+
+<p>Le interazioni con l'utente e le valutazioni sono tracciate utilizzando xAPI
+e sono rese disponibili nel Registro Valutatore di Moodle.</p>
+
+<p>E' possibile aggiungere contenuto H5P effettuando l'upload di un file .h5p.
+E' possibile creare e scaricare file .h5p su h5p.org</p>
+
+<div class="helpdoclink"><a href="https://h5p.org/moodle-more-help" class="helplinkpopup"><i class="fa fa-question-circle icon" title=""><img class="iconhelp icon-pre" alt="" title="" src="http://www.forma20.it/moodle/theme/image.php/essential/core/1590765351/docs" /></i>Aiuto ulteriore</a></div>
+";

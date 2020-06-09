@@ -1,0 +1,549 @@
+<?php
+/*
+ * $Id: anag_course.php 1415 2016-05-27 14:26:29Z d.cerullo $
+ */
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Edit Forma course settings
+ *
+ * @package    moodlecore
+ * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+require_once('../../config.php');
+require_once($CFG->libdir.'/formslib.php');
+require_once('extends_course.php');
+require_once($CFG->dirroot.'/local/f2_support/lib.php');
+require_once($CFG->dirroot.'/local/f2_import_course/lib.php');
+require_once($CFG->dirroot.'/f2_lib/core.php');
+require_once($CFG->dirroot.'/f2_lib/management.php');
+require_once($CFG->dirroot.'/f2_lib/constants.php');
+require_once($CFG->dirroot.'/blocks/f2_gestione_risorse/lib.php');
+
+$courseid         = required_param('courseid', PARAM_INT);       		  // course id
+$saved         = optional_param('saved', false, PARAM_BOOL);
+$alert_feedback         = optional_param('alert_feedback', false, PARAM_BOOL);
+
+global $PAGE,$DB,$OUTPUT;
+
+$baseurl = new moodle_url($CFG->wwwroot.'/local/f2_course/anag_course.php', array('courseid'=>$courseid));
+
+$PAGE->set_pagelayout('admin');
+$PAGE->set_url($baseurl);
+
+// basic access control checks
+if ($courseid) { // editing course
+    if ($courseid == SITEID){
+        // don't allow editing of  'site course' using this form
+        print_error('cannoteditsiteform');
+    }
+
+    $course = $DB->get_record('course', array('id'=>$courseid), '*', MUST_EXIST);
+    require_login($course);
+    $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+    require_capability('moodle/course:update', $coursecontext);
+    if($DB->record_exists('f2_anagrafica_corsi', array('courseid'=>$courseid)))
+    	$anag_course = $DB->get_record('f2_anagrafica_corsi', array('courseid'=>$courseid), '*', MUST_EXIST);
+   	else
+   		$anag_course = NULL;
+
+} else {
+    require_login();
+    print_error('per poter continuare devi compilare la scheda corso');
+}
+
+// first create the form
+class course_anag_form extends moodleform {
+	public function definition() {
+		global $PAGE, $DB;
+		$mform 			 =& $this->_form;
+		$courseid    = $this->_customdata['courseid'];   	  // course id
+		$anag_course = $this->_customdata['anag_course'];    // this contains the data of this form
+		
+		if(is_null($anag_course)){
+			$anag_course = new stdClass();
+			$anag_course->course_type = C_OBB;
+			$anag_course->costo  = 0;
+			$anag_course->durata = 0;
+			$anag_course->dir_proponente = 0;
+			$anag_course->cf = 0;
+			$anag_course->sede = array('TO');
+			$anag_course->to_x = 'R';
+			$anag_course->anno = get_anno_formativo_corrente();
+			$anag_course->tipo_budget = BDGT_OBIETTIVO;//default per i corsi obiettivo (vedi tipo_pianificazione)	
+			$anag_course->flag_dir_scuola = '-';
+		}
+		
+		switch($anag_course->course_type) {
+			case C_OBB:	// corsi obiettivo
+				$hide_input=array("tipo_budget","num_min_all","num_norm_all","num_max_all");
+				break;
+			case C_PRO:	// corsi programmati 
+				$hide_input=array("dir_proponente");
+				break;
+			default:
+				print_error('Tipologia di corso non supportata');
+				exit();
+		}
+		
+		$PAGE->requires->js('/local/f2_course/js/module.js');
+		
+		// inizio import per generazione tabella //
+		$PAGE->requires->css('/f2_lib/jquery/css/dataTable.css');
+		$PAGE->requires->css('/f2_lib/jquery/css/ui_custom.css');
+		$PAGE->requires->js('/f2_lib/jquery/jquery-1.7.1.min.js');
+		$PAGE->requires->js('/f2_lib/jquery/jquery.dataTables.js');
+		$PAGE->requires->js('/f2_lib/jquery/custom.js');
+		$PAGE->requires->js('/f2_lib/jquery/jquery.blockUI.js');
+		// fine import per generazione tabella //
+		
+		// inizio import per generazione albero //
+		$PAGE->requires->js('/f2_lib/jquery/jquery-ui.min.js');
+		$PAGE->requires->js('/f2_lib/jquery/jquery.cookie.js');
+		$PAGE->requires->js('/f2_lib/jquery/jquery.dynatree.js');
+		$PAGE->requires->css('/f2_lib/jquery/css/skin/ui.dynatree.css');
+		// fine import per generazione albero //
+		
+		//Org Picker: orgs hierarchy definition
+		$hierarchy = inner_get_orgs_hierarchy();
+
+		$mform->addElement('header','general', 'FORMA 2');
+		
+		$mform->addElement('hidden', 'courseid', $courseid);
+		$mform->addElement('hidden', 'course_type', $anag_course->course_type);
+		
+		if(!in_array('anno',$hide_input)){
+                    
+                        $current_year = get_anno_formativo_corrente();
+                    
+                        $array_value = array($current_year => $current_year,
+                                             $current_year+1 => $current_year+1);
+        
+                        if($anag_course->course_type == C_OBB)
+                        {
+                            $array_value = array();
+                            /*
+                             * AK-DC Disponibile la scelta dei due anni precedenti a 
+                             * quello corrente, più uno nel futuro (solo corsi Obbiettivo)
+                             */
+                            for($i = $current_year-2; $i <= $current_year+1; $i++)
+                            {
+                                $array_value[$i] = $i;
+                            }
+                        }
+			
+			$mform->addElement('select', 'anno', get_string('anno', 'local_f2_course'), $array_value, NULL);
+			$mform->addHelpButton('anno', 'anno','local_f2_course');
+			$mform->addRule('anno', null, 'required', null, 'server');
+		}
+
+		if(!in_array('durata',$hide_input)){
+			$attribute = array('maxlength'=>254,'size'=>50);
+			$mform->addElement('text','durata', get_string('durata','local_f2_course'), $attribute);
+			$mform->addHelpButton('durata', 'durata', 'local_f2_course');
+			$mform->addRule('durata', null, 'required', null, 'server');
+		}
+		
+		if(!in_array('cf',$hide_input)){
+			$mform->addElement('text','cf', get_string('cf','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('cf', 'cf','local_f2_course');
+			$mform->addRule('cf', null, 'required', null, 'server');
+		}
+		
+		if(!in_array('orario',$hide_input)){
+			$mform->addElement('text','orario', get_string('orario','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('orario',  'orario','local_f2_course');
+			$mform->addRule('orario', null, 'required', null, 'server');
+		}
+
+		if(!in_array('costo',$hide_input)){
+			$mform->addElement('text','costo', get_string('costo','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('costo', 'costo','local_f2_course');
+			if($anag_course->course_type==C_PRO)
+				$mform->addRule('costo', null, 'required', null, 'server');
+		}
+		
+		if(!in_array('tipo_budget',$hide_input)){
+			$mform->addElement('select', 'tipo_budget', 
+							get_string('tipo_budget', 'local_f2_course'), 
+							from_obj_to_array_select(get_tipo_pianificazione(),array('id','descrizione')), NULL);
+			$mform->addHelpButton('tipo_budget', 'tipo_budget','local_f2_course');
+			if($anag_course->course_type==C_PRO)
+				$mform->addRule('tipo_budget', null, 'required', null, 'server');
+		}
+		else {
+			$mform->addElement('hidden', 'tipo_budget');
+			$mform->setType('tipo_budget', PARAM_INT);
+		}
+		
+		if(!in_array('sf',$hide_input)){
+			$mform->addElement('select', 'sf', get_string('sf', 'local_f2_course'), 
+							from_obj_to_array_select(get_segmento_formativo(), array('id','descrizione')), NULL);
+			$mform->addHelpButton('sf', 'sf', 'local_f2_course');
+			$mform->setType('sf', PARAM_ALPHANUM);
+			$mform->addRule('sf', null, 'required', null, 'server');
+		}
+		
+		if(!in_array('af',$hide_input)){
+			$opts = (isset($anag_course->sf) ? 
+				from_obj_to_array_select(get_AF_from_SF($anag_course->sf), array('id','descrizione')) : 
+				from_obj_to_array_select(get_aree_formative(), array('id','descrizione')));
+			
+			$mform->addElement('select', 'af', get_string('af', 'local_f2_course'), $opts, NULL);
+			$mform->addHelpButton('af', 'af', 'local_f2_course');
+			$mform->setType('af', PARAM_ALPHANUM);
+			$mform->addRule('af', null, 'required', null, 'server');
+		}
+		
+		if(!in_array('subaf',$hide_input)){
+			$opts = (isset($anag_course->af) ? 
+				from_obj_to_array_select(get_SUBAF_from_AF($anag_course->af), array('id','descrizione')) : 
+				from_obj_to_array_select(get_sub_aree_formative(), array('id','descrizione')));
+			
+			$mform->addElement('select', 'subaf', get_string('subaf', 'local_f2_course'), $opts, NULL);
+			$mform->addHelpButton('subaf', 'subaf', 'local_f2_course');
+			$mform->setType('subaf', PARAM_ALPHANUM);
+			$mform->addRule('subaf', null, 'required', null, 'server');
+		}
+		
+		if(!in_array('to_x',$hide_input)){
+			$mform->addElement('select', 'to_x', get_string('to_x', 'local_f2_course'), 
+							from_obj_to_array_select(get_tipologia_org(), array('id','descrizione')), NULL);
+			$mform->addHelpButton('to_x', 'to_x','local_f2_course');
+			$mform->addRule('to_x', null, 'required', null, 'server');
+		}
+
+		if(!in_array('dir_proponente',$hide_input)){
+			$organisation_name = '';
+			if ($anag_course->dir_proponente > 0) {
+				$organisation_name = $DB->get_field('org', 'fullname', array('id' => $anag_course->dir_proponente));
+			}
+
+			$mform->addElement('static', 's_dir_proponente', 
+							get_string('dir_proponente', 'local_f2_course'), 
+							//($org_label_id, $org_hidden_name, $button_label, $div_id, $hierarchy, $organisation_title='',$callbackhandler='', $select_only_leaves = false)
+							get_organisation_picker_html('organisationname', 'dir_proponente',
+											get_string('chooseorganisation', 'local_f2_domains'),
+											'orgs', $hierarchy, $organisation_name, '', true));
+			$mform->addElement('hidden','dir_proponente');
+			$mform->setType('dir_proponente', PARAM_INT);
+			$mform->addHelpButton('s_dir_proponente', 'dir_proponente','local_f2_course');
+			if($anag_course->course_type==C_OBB)
+				$mform->addRule('dir_proponente', null, 'required', null, 'server');
+		}
+
+		if(!in_array('te',$hide_input)){
+			$mform->addElement('select', 'te', 
+							get_string('te', 'local_f2_course'), 
+							from_obj_to_array_select(get_tipo_ente_erogatore(), array('id','descrizione')), NULL);
+			$mform->addHelpButton('te', 'te', 'local_f2_course');
+			if($anag_course->course_type==C_PRO)
+				$mform->addRule('te', null, 'required', null, 'server');
+		}
+
+		if(!in_array('flag_dir_scuola',$hide_input)){
+			$mform->addElement('select', 'flag_dir_scuola', 
+							get_string('flag_dir_scuola', 'local_f2_course'), 
+							from_obj_to_array_select(get_flag_dir_scuola(), array('id','descrizione')) );
+			$mform->addHelpButton('flag_dir_scuola','flag_dir_scuola','local_f2_course');
+			$mform->addRule('flag_dir_scuola', null, 'required', null, 'server');
+		}
+				
+		if(!in_array('id_dir_scuola',$hide_input)){
+			if ($anag_course->flag_dir_scuola == 'D') {
+				if ($anag_course->id_dir_scuola > 0) {
+					$anag_course->dir_scuola = $DB->get_field('org', 'fullname', array('id' => $anag_course->id_dir_scuola));
+				}
+			} else {
+				if ($anag_course->id_dir_scuola > 0) {
+					$anag_course->dir_scuola = $DB->get_field('f2_fornitori', 'denominazione', array('id' => $anag_course->id_dir_scuola));
+				}
+			}
+
+			$mform->addElement('static', 's_dir_scuola', 
+							get_string('dir_scuola', 'local_f2_course'), 
+							get_organisation_picker_html('l_dir_scuola', 'id_dir_scuola',
+											get_string('organisation', 'local_f2_domains'),
+											'orgs1', $hierarchy, $anag_course->dir_scuola, '', true)
+							.'<input type="button" id="id_button_scuola" value="'.get_string('scuola', 'local_f2_course').'"
+								style="display:none" onClick="return M.f2_course.changeValueButton(this, \''.get_string('chiudi', 'local_f2_course').'\', \''.get_string('scuola', 'local_f2_course').'\')">');
+			$mform->addElement('hidden','id_dir_scuola');
+			$mform->setType('id_dir_scuola', PARAM_INT);
+			$mform->addHelpButton('s_dir_scuola', 'dir_scuola', 'local_f2_course');
+			$mform->addRule('id_dir_scuola', null, 'required', null, 'client');
+		}
+
+		$mform->addElement('html', '<div id="div_tab_autosearch" style=\'display:none\'>');
+		$mform->addElement('html', html_writer::table( tbl_fornitori() ));
+		$mform->addElement('html', '</div>');
+		
+		if(!in_array('viaente',$hide_input)){
+			$mform->addElement('text','viaente', get_string('viaente','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('viaente', 'viaente', 'local_f2_course');
+                        $mform->addRule('viaente', 'inserire un indirizzo', 'required', null, 'client');
+		}
+		
+		if(!in_array('localita',$hide_input)){
+			$mform->addElement('text','localita', get_string('localita','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('localita', 'localita', 'local_f2_course');
+		}
+		
+		if(!in_array('sede',$hide_input)){
+			$anag_course->sede=array();
+			
+			if(!is_null($anag_course)){
+				foreach(get_sedi_from_corso($courseid) as $sedi_db)
+					$anag_course->sede[]=$sedi_db->id;
+			}
+			
+			$sedi=array();
+			foreach(get_sedi_corso() as $sede)
+				$sedi[$sede->id]=$sede->citta;
+			
+			$select = &$mform->addElement('select', 'sede', get_string('sede','local_f2_course'), $sedi, 'size="'.count($sedi).'"');
+			$select->setMultiple(true);
+			$mform->addHelpButton('sede', 'sede', 'local_f2_course');
+			$mform->addRule('sede', null, 'required', null, 'client');
+			$mform->setDefault('sede', array('TO'));
+		}
+		
+		if(!in_array('determina',$hide_input)){
+			$mform->addElement('text','determina', get_string('determina','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('determina', 'determina','local_f2_course');
+		}
+		
+		if(!in_array('note',$hide_input)){
+			$mform->addElement('textarea', 'note', get_string('note','local_f2_course'), 'wrap="virtual" rows="5" cols="47"');
+			$mform->addHelpButton('note', 'note','local_f2_course');
+		}
+		
+		if(!in_array('num_min_all',$hide_input)){
+			$mform->addElement('text','num_min_all', get_string('num_min_all','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('num_min_all', 'num_min_all','local_f2_course');
+		}
+		
+		if(!in_array('num_norm_all',$hide_input)){
+			$mform->addElement('text','num_norm_all', get_string('num_norm_all','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('num_norm_all', 'num_norm_all','local_f2_course');
+		}
+		
+		if(!in_array('num_max_all',$hide_input)){
+			$mform->addElement('text','num_max_all', get_string('num_max_all','local_f2_course'),'maxlength="254" size="50"');
+			$mform->addHelpButton('num_max_all', 'num_max_all','local_f2_course');
+		}
+		
+		
+		echo '<script type="text/javascript">
+				function myValidate(){
+					if(document.getElementById(\'id_durata\').value == ""){
+						alert("Errore campo '.get_string('durata','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_cf\').value == ""){
+						alert("Errore campo '.get_string('cf','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_orario\').value == ""){
+						alert("Errore campo '.get_string('orario','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_sf\').value == ""){
+						alert("Errore campo '.get_string('sf','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_af\').value == ""){
+						alert("Errore campo '.get_string('af','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_subaf\').value == ""){
+						alert("Errore campo '.get_string('subaf','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_to_x\').value == ""){
+						alert("Errore campo '.get_string('to_x','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_te\').value == ""){
+						alert("Errore campo '.get_string('te','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_flag_dir_scuola\').value == ""){
+						alert("Errore campo '.get_string('flag_dir_scuola','local_f2_course').'.");
+						return false;
+					}
+					else if(document.getElementById(\'id_sede\').value == ""){
+						alert("Errore campo '.get_string('sede','local_f2_course').'.");
+						return false;
+					}	
+					return true;
+				}
+			</script>';
+				
+		//$this->add_action_buttons();
+		
+		if (!isset($submitlabel) || is_null($submitlabel)){
+			$submitlabel = get_string('savechanges');
+		}
+		$buttonarray=array();
+		$buttonarray[] = $mform->createElement('submit', 'submitbutton', $submitlabel,array('onClick'=>'return myValidate()'));
+		$buttonarray[] = $mform->createElement('cancel');
+		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+		$mform->closeHeaderBefore('buttonar');
+		
+		$this->set_data($anag_course); /// finally set the current form data
+		
+	}
+	
+	// perform some extra moodle validation
+	function validation($data) {
+		global $DB, $CFG;
+
+		$errors = array();
+		if(!filter_var($data['cf'],FILTER_VALIDATE_FLOAT) || $data['cf']<0 || $data['cf']>5000 || (substr($data['cf'], -1)==".")){
+		 	$errors['cf']= get_string('error_cf','local_f2_course','cf');
+		 }
+		if(isset($data['num_min_all']) && (!filter_var($data['num_min_all'],FILTER_VALIDATE_INT) || $data['num_min_all']>999 )){
+			$errors['num_min_all']= get_string('error_num_min_all','local_f2_course','num_min_all');
+		}
+		if(isset($data['num_norm_all']) && (!filter_var($data['num_norm_all'],FILTER_VALIDATE_INT) || $data['num_norm_all']>999 )){
+			$errors['num_norm_all']= get_string('error_num_norm_all','local_f2_course','num_norm_all');
+		}
+		if(isset($data['num_max_all']) && (!filter_var($data['num_max_all'],FILTER_VALIDATE_INT) || $data['num_max_all']>999 )){
+			$errors['num_max_all']= get_string('error_num_max_all','local_f2_course','num_max_all');
+		}
+		 
+//		 if($data['course_type']==C_PRO) {
+//			 if(!filter_var($data['costo'],FILTER_VALIDATE_FLOAT) || $data['costo']<0 || $data['costo']>1000000 || (substr($data['costo'], -1)==".")){
+//				 $errors['costo']= get_string('error_costo','local_f2_course','costo');
+//			 }
+//		 }
+		 
+		if ($data['durata'] != '') {
+			if(!filter_var($data['durata'],FILTER_VALIDATE_FLOAT) || $data['durata']<0 || $data['durata']>1000 || (substr($data['durata'], -1)=="."))
+				$errors['durata']= get_string('error_durata','local_f2_course','durata');
+		}
+		 
+		return $errors;
+	}
+}
+function inner_get_orgs_hierarchy() {
+	define('CONST_LEV_DIREZIONE',3);
+	
+	$parametri_regioni = get_parametri_by_prefix('p_f2_dominio_radice_regione_');
+	$id_radici_regione_array = array();
+	foreach ($parametri_regioni as $param) {
+		$id_radici_regione_array[] = $param->val_int;
+	}
+	$tree_root = get_root_framework();
+	if (!is_null($tree_root)) {
+		//var_dump($id_radici_regione_array);exit;
+			$hierarchy = recursivesubtreejson($tree_root->id, $tree_root->fullname, $id_radici_regione_array, true, CONST_LEV_DIREZIONE);
+	} else {
+			$hierarchy = '';
+	}
+	return $hierarchy;
+}
+/**
+ * 
+ */
+
+$editform = new course_anag_form(NULL, array('courseid'=>$courseid,'anag_course'=>$anag_course));
+
+
+if ($editform->is_cancelled()) {
+	redirect($baseurl);
+
+} else if ($data = $editform->get_data()) {
+	//AK: hack per forzare l'assegnazione di af e subaf:
+	//    infatti lib QuickForm esegue dei controlli per cui non è possibile
+	//    selezionare un valore che non è tra quelli presenti nelle option
+	//    di una select. Però in questo caso le select di af e subaf sono
+	//    generate dinamicamente in base alla selezione su sf.
+	$data->af = $_POST["af"];
+	$data->subaf = $_POST["subaf"];
+	//print_r($data);
+	//print_r($_POST["af"]);
+	//print_r(data_submitted());
+	//die;
+	// process data if submitted
+	manage_anag_course($data);
+        
+        $baseurl = new moodle_url($CFG->wwwroot.'/local/f2_course/anag_course.php', array('courseid'=>$courseid, 'saved'=>true));
+        
+        // Verifico che siano già presenti le due istanze di feedback per il corso (docenti e studenti).
+        if (!courseFeedbacksExist($courseid)) {
+            
+            // se non esistono ancora, allora le creo
+            $id_feedback = creaFeedback($courseid, true); // feedback per docenti
+            if ($id_feedback) {
+                creaDomandeFeedbackDaModello($id_feedback, true);
+            } else {
+                print_error("Si è verificato un errore durante la creazione del modulo feedback docente");
+            }
+            $id_feedback_s = creaFeedback($courseid, false, null, true); // feedback per studenti
+            if ($id_feedback_s) {
+                creaDomandeFeedbackDaModello($id_feedback_s, false, null, true);
+            } else {
+                print_error("Si è verificato un errore durante la creazione del modulo feedback studente");
+            }
+            
+            $baseurl = new moodle_url($CFG->wwwroot.'/local/f2_course/anag_course.php', array('courseid'=>$courseid, 'saved'=>true, 'alert_feedback'=>true));
+        }
+
+	redirect($baseurl);
+}
+
+
+// Print the form
+//$site = get_site();
+
+$PAGE->navbar->add(get_string('custom_anag_course','local_f2_course'));
+$title = get_string('title_anag_course','local_f2_course');
+
+$PAGE->set_title($title);
+$PAGE->set_heading($title);
+$jsmodule = array(
+		'name'  =>  'f2_course',
+		'fullpath'  =>  '/local/f2_course/js/module.js',
+		'requires'  =>  array('base', 'attribute', 'node', 'datasource-io', 'datasource-jsonschema', 'node-event-simulate', 'event-key')
+);
+$jsdata = array(
+		sesskey()
+);
+$PAGE->requires->js_init_call('M.f2_course.init',
+															$jsdata,
+															true,
+															$jsmodule);
+echo $OUTPUT->header();
+
+$test = new extends_f2_course($courseid);
+$test->print_tab_edit_course('anag_course');
+
+echo $OUTPUT->heading($title);
+
+if ($saved)
+    echo $OUTPUT->notification(get_string('changessaved'), 'notifysuccess');
+
+if ($alert_feedback) {
+    echo $OUTPUT->box(get_string('alert_feedback_obv', 'local_f2_import_course'), 'generalbox boxwidthnormal boxaligncenter');
+    echo '<br />';
+}
+
+$editform->display();
+
+echo $OUTPUT->footer();

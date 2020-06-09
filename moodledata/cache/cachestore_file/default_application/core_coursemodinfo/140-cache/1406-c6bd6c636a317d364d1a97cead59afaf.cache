@@ -1,0 +1,45 @@
+O:8:"stdClass":9:{s:7:"modinfo";a:6:{i:3524;O:8:"stdClass":10:{s:2:"id";s:3:"444";s:2:"cm";s:4:"3524";s:3:"mod";s:10:"facetoface";s:7:"section";s:1:"0";s:9:"sectionid";s:4:"3216";s:6:"module";s:2:"21";s:5:"added";s:1:"0";s:7:"visible";s:1:"0";s:10:"visibleold";s:1:"1";s:4:"name";s:34:"Visualizza le edizioni disponibili";}i:3525;O:8:"stdClass":10:{s:2:"id";s:4:"1020";s:2:"cm";s:4:"3525";s:3:"mod";s:8:"feedback";s:7:"section";s:1:"0";s:9:"sectionid";s:4:"3216";s:6:"module";s:1:"5";s:5:"added";s:10:"1519914354";s:7:"visible";s:1:"0";s:10:"visibleold";s:1:"1";s:4:"name";s:40:"Questionario nota di sintesi del docente";}i:3527;O:8:"stdClass":13:{s:2:"id";s:3:"494";s:2:"cm";s:4:"3527";s:3:"mod";s:8:"resource";s:7:"section";s:1:"0";s:9:"sectionid";s:4:"3216";s:6:"module";s:2:"15";s:5:"added";s:10:"1519914710";s:7:"visible";s:1:"1";s:10:"visibleold";s:1:"1";s:10:"completion";s:1:"1";s:4:"icon";s:8:"f/pdf-24";s:4:"name";s:12:"scheda corso";s:7:"onclick";s:234:"window.open('http://www.forma20.it/moodle/mod/resource/view.php?id=3527&amp;redirect=1', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;";}i:3526;O:8:"stdClass":10:{s:2:"id";s:4:"1021";s:2:"cm";s:4:"3526";s:3:"mod";s:8:"feedback";s:7:"section";s:1:"0";s:9:"sectionid";s:4:"3216";s:6:"module";s:1:"5";s:5:"added";s:10:"1519914354";s:7:"visible";s:1:"1";s:10:"visibleold";s:1:"1";s:4:"name";s:26:"Questionario di gradimento";}i:3528;O:8:"stdClass":12:{s:2:"id";s:3:"290";s:2:"cm";s:4:"3528";s:3:"mod";s:5:"label";s:7:"section";s:1:"0";s:9:"sectionid";s:4:"3216";s:6:"module";s:2:"10";s:5:"added";s:10:"1519914854";s:7:"visible";s:1:"1";s:10:"visibleold";s:1:"1";s:10:"completion";s:1:"1";s:4:"name";s:53:"
+ Le chiediamo gentilmente di compilare il questi...";s:7:"content";s:1268:"<div class="no-overflow"><p></p>
+<p><span style="font-size: 12pt;"> Le chiediamo gentilmente di compilare il questionario di gradimento<br /></span></p>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div><span style="font-size: 12pt; font-family: arial,helvetica,sans-serif;"><span style="font-size: 12pt; font-family: arial,helvetica,sans-serif;"></span></span>
+<p style="margin: 0;"> <span style="opacity: 0;">&gt;</span>  </p>
+</div>
+<div><span style="font-family: arial,helvetica,sans-serif; font-size: 12pt;">La compilazione richiede solo due minuti di tempo ed è anonima. </span></div>
+<div>
+<div>
+<div class="no-overflow">
+<div class="no-overflow">
+<p><span style="font-family: arial,helvetica,sans-serif; font-size: 12pt;">La sua opinione è importante per noi perchè ci aiuta a valutare e migliorare la progettazione dei corsi. </span></p>
+<p><span style="font-family: arial,helvetica,sans-serif; font-size: 12pt;">Grazie per la collaborazione.</span></p>
+<p> </p>
+<p><span style="font-family: arial,helvetica,sans-serif; font-size: 12pt;"> </span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div>";}i:3529;O:8:"stdClass":11:{s:2:"id";s:3:"260";s:2:"cm";s:4:"3529";s:3:"mod";s:5:"forum";s:7:"section";s:1:"0";s:9:"sectionid";s:4:"3216";s:6:"module";s:1:"7";s:5:"added";s:10:"1519915598";s:7:"visible";s:1:"1";s:10:"visibleold";s:1:"1";s:10:"completion";s:1:"1";s:4:"name";s:5:"FORUM";}}s:12:"sectioncache";a:1:{i:0;O:8:"stdClass":3:{s:2:"id";s:4:"3216";s:4:"name";N;s:12:"availability";N;}}s:9:"shortname";s:10:"18008_2018";s:8:"fullname";s:39:"Applicativo BMOB e Manuale consegnatari";s:6:"format";s:4:"grid";s:16:"enablecompletion";s:1:"1";s:9:"groupmode";s:1:"0";s:14:"groupmodeforce";s:1:"0";s:8:"cacherev";s:10:"1590765351";}

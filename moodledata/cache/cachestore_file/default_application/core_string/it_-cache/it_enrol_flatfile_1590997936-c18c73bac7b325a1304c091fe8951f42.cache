@@ -1,0 +1,24 @@
+a:16:{s:8:"encoding";s:13:"Codifica file";s:13:"expiredaction";s:36:"Azione alla scadenza dell'iscrizione";s:18:"expiredaction_help";s:144:"L'azione da compiere quando scade l'iscrizione di un partecipante. Da notare che alcuni dati verranno eliminati per effetto della disiscrizione.";s:14:"filelockedmail";s:272:"Il file di testo ({$a}) che stai utilizzando per le iscrizioni  non può essere rimosso dal processo cron. Questo In genere a che i permessi sono sbagliati. Per favore orreggi i permessi in modo che Moodle possa eliminare il file, altrimenti sarà elaborato ripetutamente.";s:21:"filelockedmailsubject";s:29:"Errore grave: file iscrizioni";s:15:"flatfile:manage";s:46:"Gestire manualmente le iscrizioni degli utenti";s:16:"flatfile:unenrol";s:45:"Disiscrivere manualmente gli utenti dai corsi";s:8:"location";s:17:"Percorso del file";s:13:"location_desc";s:117:"Il percorso completo del file delle iscrizioni. Il file verrà eliminato automaticamente al termine dell'elaborazione";s:11:"notifyadmin";s:24:"Avverti l'amministratore";s:14:"notifyenrolled";s:27:"Avverti gli utenti iscritti";s:14:"notifyenroller";s:46:"Avverti l'utente responsabile delle iscrizioni";s:34:"messageprovider:flatfile_enrolment";s:36:"Messaggi di iscrizione File di testo";s:7:"mapping";s:15:"Mappatura ruoli";s:10:"pluginname";s:10:"File (CSV)";s:15:"pluginname_desc";s:949:"Il plugin di iscrizione IMS Enterprise controlla ripetutamente la presenza di un file di testo  opportunamente formattato nel percorso impostato. Se il file viene trovato, verrà elaborato.
+Il file, di tipo CSV, deve contenere da quattro a sei campi, come segue:
+
+
+operation, role, user idnumber, course idnumber [, starttime [, endtime]]
+
+dove:
+
+* operation - add | del
+* role - student | teacher | teacheredit
+* user idnumber - codice identificativo nella tabella user. Nota Bene: non si tratta del campo id
+* course idnumber - codice identificativo nella tabella corsi, Nota bene non si tratta del campo id
+* starttime - inizio (in secondi a partire da epoch) - opzionale
+* endtime - fine (in secondi a partire da epoch) - opzionale
+
+Esempio:
+<pre class="informationbox">
+add, student, 5, CF101
+add, teacher, 6, CF101
+add, teacheredit, 7, CF101
+del, student, 8, CF101
+del, student, 17, CF101
+add, student, 21, CF101, 1091115000, 1091215000
+</pre>";}

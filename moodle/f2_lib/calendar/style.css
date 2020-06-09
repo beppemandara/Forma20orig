@@ -1,0 +1,114 @@
+.calendar{
+	border:1px solid #a3a3a3;
+	font-family:Tahoma, Verdana, Arial, sans-serif;
+	font-size:10px;
+	color:#666666;
+	background-color:#ffffff;
+	padding:1px;
+	width:218px;
+}
+
+.calendar > div.header{
+	background-color: #B5C0CF;
+	padding:2px;
+	height:15px;
+}
+.calendar > div.header .date, .calendar > div.header .date_up{
+	padding:1px 13px 1px 1px;
+	margin: 0px 2px 0px 12px;
+	color:#6F767F;
+	font-weight:bold;
+	cursor:pointer;
+	background:url(images/down.gif) right 5px no-repeat;
+}
+.calendar > div.header .date_up{
+	background:url(images/up.gif) right 4px no-repeat;
+}
+
+.calendar > div.main > table{
+	border:0px;
+	border-spacing:1px;
+}
+.calendar > div.main > table th{
+	text-align:center;
+	width:30px;
+	padding:4px 0px 4px 0px;
+}
+.calendar > div.main > table td{
+	text-align:center;
+	padding:4px 0px 4px 0px;
+}
+
+.calendar > div.main > table td.day_on{
+	background-color:#B5C0CF;
+	cursor:pointer;
+}
+.calendar > div.main > table td.day_selected{
+	background-color:#D4D8DE;
+}
+.calendar > div.main > table td.day_disabled{
+	color:#cccccc;
+}
+
+.calendar > div.inc_dec{
+	border:1px solid #B3B8BF;
+}
+.calendar > div.inc_dec > table{
+	border-spacing:1px;
+	background-color: #f6f6f6;
+}
+.calendar > div.inc_dec > table th{
+	background-color: #D1D7DF;
+	border-bottom:1px solid #C2C8CF;
+	color:#6F767F;
+	padding: 1px;
+}
+.calendar > div.inc_dec > table th .years{
+	width:94px;
+}
+
+.calendar > div.inc_dec > table td{
+	text-align:center;
+	width:42px;
+	cursor:pointer;
+	padding:3px 0px;
+}
+.calendar > div.inc_dec > table td.month_on{
+	font-weight:bold;
+}
+.calendar > div.inc_dec > table td.month_selected{
+	font-weight:bold;
+	color:#9BABBF;
+}
+
+.calendar > div.footer{
+	text-align:center;
+	margin-top:1px;
+	padding:3px;
+	background-color:#dfdfdf;
+}
+.calendar > div.footer > div{
+	cursor: pointer;
+}
+
+.calendar > div.time{
+	text-align:center;
+	margin-top:1px;
+	padding:2px;
+	background-color:#e3e3e3;
+}
+
+.calendar > div.time > div{
+	width:104px;
+	margin:0px auto;
+}
+.calendar > div.time > div > div{
+	background-color:#ECECEC;
+	border-top:1px solid #D1D1D1;
+	border-bottom:1px solid #D1D1D1;
+	color:#999999;
+	width:20px;
+	height: 15px;
+	text-align:center;
+	padding-top:2px;
+}

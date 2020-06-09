@@ -1,0 +1,149 @@
+<?php
+
+//$Id: pianodistudi.php 124 2012-09-13 l.sampo $
+global $CFG, $OUTPUT, $PAGE, $SITE;
+
+require_once '../../config.php';
+require_once($CFG->dirroot.'/f2_lib/core.php');
+require_once($CFG->dirroot.'/f2_lib/management.php');
+require_once($CFG->dirroot.'/f2_lib/report.php');
+require_once($CFG->dirroot.'/f2_lib/constants.php');
+
+require_login();
+$context = get_context_instance(CONTEXT_SYSTEM);
+//require_capability('local/f2_course:mycourses', $context);
+require_capability('local/f2_course:mycourses',get_context_instance(CONTEXT_COURSE, 1));
+
+$page     = optional_param('page', 0, PARAM_INT);
+$perpage  = optional_param('perpage', 10, PARAM_INT);
+$column   = optional_param('column', 'lastname', PARAM_TEXT);
+$sort     = optional_param('sort', 'ASC', PARAM_TEXT);
+
+$pagename = get_string('my_courses', 'local_f2_course');
+
+$PAGE->set_context($context);
+$PAGE->set_pagelayout('standard');
+$PAGE->set_url('/local/f2_course/mycourse_prog.php');
+$PAGE->set_title(get_string('my_courses', 'local_f2_course'));
+$PAGE->settingsnav;
+$PAGE->navbar->add(get_string('my_courses', 'local_f2_course'));
+$PAGE->set_heading($SITE->shortname.': '.$pagename);
+
+$viewable_years = array(get_anno_formativo_corrente(), get_anno_formativo_corrente()-1);
+
+$filtercourse     = optional_param('filtercourse', '', PARAM_TEXT);
+$filteryear     = optional_param('filteryear', $viewable_years[0], PARAM_TEXT);
+$filtercourse_arr = array();
+$filteryear_param = -1;
+if ($filtercourse !== '')
+{
+	$filtercourse_arr['idnumber'] = mysql_escape_string($filtercourse);
+// 	$filtercourse_arr['idnumber'] = mysql_real_escape_string($filtercourse);
+}
+if ($filteryear !== '')
+{
+	$filteryear_param = intval(mysql_escape_string($filteryear));
+// 	$filteryear_param = intval(mysql_real_escape_string($filteryear));
+}
+
+echo $OUTPUT->header();
+
+$currenttab = 'my_courses_prog';
+require('tabs_mycourses.php');
+
+echo $OUTPUT->heading(get_string('my_courses_prog', 'local_f2_course'));
+echo $OUTPUT->box_start();
+
+//INIZIO Form
+?>
+<form id="mform1" name="mform1" action="" method="post">
+<b>Codice corso:</b>
+<input type="text" id="filtercourse" name="filtercourse" value="<?php echo $filtercourse ?>">
+<b>Anno:</b> 
+	<select id ="filteryear" name ="filteryear">
+		<option value="<?php echo '' ?>"><?php echo 'Tutti' ?></option>
+		<option value="<?php echo $viewable_years[0] ?>" <?php if($viewable_years[0] == intval($filteryear)) { echo 'selected'; } else echo ''; ?>><?php echo $viewable_years[0]?></option>
+		<option value="<?php echo $viewable_years[1] ?>" <?php if($viewable_years[1] == intval($filteryear)) { echo 'selected'; } else echo ''; ?>><?php echo $viewable_years[1]?></option>
+	</select>
+        <input type="submit" name="submitbtn" id="submitbtn" value="Cerca">
+</form>
+<?php
+//FINE Form
+
+$pagination = array('perpage' => $perpage,
+					'page' => $page,
+					'column' => $column,
+					'sort' => $sort);
+
+//ID del form dove fare il submit
+$form_id = 'mform1';	 										
+$post_extra = array('column' => $column, 'sort' => $sort);
+
+$mycourses = get_mycourses(NULL, C_PRO, $pagination, $filtercourse_arr, $filteryear_param);
+$total_rows = count($mycourses);
+if ($total_rows > 0) {
+    $table = new html_table();
+    $table->width = '80%';
+    $head_table = array('titolo','my_c_idnumber','my_c_timestart','my_c_timefinish','my_c_userstatus','modalita_didattica','my_c_course_status','action');
+//    $head_table = array('my_c_fullname','my_c_idnumber','my_c_timestart','my_c_timefinish','my_c_userstatus','action');
+    $head_table_sort = array('titolo');
+    $tootip = array('','','','',get_string('my_c_userstatus_tooltip', 'local_f2_traduzioni'),get_string('my_c_course_status_tooltip', 'local_f2_traduzioni'),'');
+//    $tootip = array('','','','',get_string('my_c_userstatus_tooltip', 'local_f2_traduzioni'),'');
+    $align = array('center','center','center','center','center','center','center');
+//    $align = array('center','center','center','center','center','center');
+    $table->align = $align;
+    $table->head = build_head_table($head_table, $head_table_sort, $post_extra, $total_rows, $page, $perpage, $form_id, $tootip);
+
+    $table->data = array();
+    foreach ($mycourses as $c) {
+
+		//Se il corso è on-line
+		if(get_type_course($c->id)){
+			$modalita_didattica = get_string('on_line', 'local_f2_traduzioni');
+			$val_icon = " <a href=\"{$CFG->wwwroot}/grade/report/user/index.php?id={$c->id}\" title=\"Dettagli valutazione\">".
+					"<img src=\"{$CFG->wwwroot}/pix/t/grades.gif\" class=\"icon\" alt=\"Dettagli valutazione\" /></a>";
+			
+			$state_user_course = get_status_course_completion_user($USER->id,$c->id);
+				
+			if($state_user_course->timestarted && !$state_user_course->timecompleted)
+				$status_corso = get_string('in_corso', 'local_f2_traduzioni');
+			else if ($state_user_course->timecompleted)
+				$status_corso = get_string('completato', 'local_f2_traduzioni');
+			else
+				$status_corso = get_string('non_iniziato', 'local_f2_traduzioni');
+		}
+		else {
+			$modalita_didattica = get_string('aula', 'local_f2_traduzioni');
+			$val_icon = "";
+			$status_corso = "--";
+		}
+
+//            $status = ($c->userstatus) ? get_string('my_complete','local_f2_course') : get_string('my_booked','local_f2_course');
+            $status = get_string('my_booked','local_f2_course');
+//            $status_corso = ($c->userstatus) ? get_string('my_complete','local_f2_course') : get_string('my_booked','local_f2_course');
+            $timestart = ($c->timestart) ? date('d/m/Y', $c->timestart) : '';
+            $timefinish = ($c->timefinish) ? date('d/m/Y', $c->timefinish) : '';
+            $go_icon = " <a href=\"{$CFG->wwwroot}/course/view.php?id={$c->id}\" title=\"Vai al corso\">".
+                    "<img src=\"{$CFG->wwwroot}/local/f2_course/pix/entra.png\" class=\"icon\" alt=\"Vai al corso\" /></a>";
+            $table->data[] = array(
+                            $c->fullname,
+                            $c->idnumber,
+                            $timestart,
+                            $timefinish,
+                            $status,
+							$modalita_didattica,
+                            $status_corso,
+                            $go_icon." ".$val_icon
+            );
+    }
+
+    $paging_bar = new paging_bar_f2($total_rows, $page, $perpage, $form_id, $post_extra);
+    echo $paging_bar->print_paging_bar_f2();
+    echo html_writer::table($table);
+    echo $paging_bar->print_paging_bar_f2();
+} else {
+    echo heading_msg(get_string('nomycoursesfoundprg', 'local_f2_traduzioni'));
+}
+
+echo $OUTPUT->box_end();
+echo $OUTPUT->footer();

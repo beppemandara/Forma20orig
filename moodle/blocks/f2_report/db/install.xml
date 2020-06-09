@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/f2_report/db" VERSION="20121114" COMMENT="XMLDB file for Moodle blocks/f2_report"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="f2_report_pentaho" COMMENT="tabella di definizione dei report generati tramite pentaho" NEXT="f2_report_pentaho_role_map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="nome"/>
+        <FIELD NAME="nome" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" COMMENT="nome report" PREVIOUS="id" NEXT="full_path"/>
+        <FIELD NAME="full_path" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" COMMENT="full_path_prpt" PREVIOUS="nome" NEXT="attivo"/>
+        <FIELD NAME="attivo" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" COMMENT="1=attivo, 0=disattivo" PREVIOUS="full_path" NEXT="extra_param"/>
+        <FIELD NAME="extra_param" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="1=parametrico, 0=non parametrico" PREVIOUS="attivo"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_report_pentaho_role_map" COMMENT="tabella che collega i report di pentaho e i ruoli di moodle" PREVIOUS="f2_report_pentaho" NEXT="f2_report_pentaho_param">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="id_report"/>
+        <FIELD NAME="id_report" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="id report pentaho" PREVIOUS="id" NEXT="id_role"/>
+        <FIELD NAME="id_role" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="id ruolo di moodle" PREVIOUS="id_report"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="fk_f2_report_rm_on_idrep"/>
+        <KEY NAME="fk_f2_report_rm_on_idrep" TYPE="foreign" FIELDS="id_report" REFTABLE="f2_report_pentaho" REFFIELDS="id" COMMENT="chiave esterna su id_report=report.id" PREVIOUS="primary" NEXT="fk_f2_report_rm_on_idrole"/>
+        <KEY NAME="fk_f2_report_rm_on_idrole" TYPE="foreign" FIELDS="id_role" REFTABLE="role" REFFIELDS="id" COMMENT="chiave esterna su id_role=role.id" PREVIOUS="fk_f2_report_rm_on_idrep"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_report_pentaho_param" COMMENT="tabella dei parametri usati dai report di pentaho" PREVIOUS="f2_report_pentaho_role_map" NEXT="f2_report_pentaho_param_map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="nome"/>
+        <FIELD NAME="nome" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" COMMENT="nome del parametro" PREVIOUS="id" NEXT="default_value"/>
+        <FIELD NAME="default_value" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" COMMENT="valore di default del parametro" PREVIOUS="nome"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="f2_report_pentaho_param_map" COMMENT="tabella che lega i report ai suoi parametri" PREVIOUS="f2_report_pentaho_param">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="id_report"/>
+        <FIELD NAME="id_report" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="id del report di pentaho" PREVIOUS="id" NEXT="id_report_param"/>
+        <FIELD NAME="id_report_param" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="id del parametro usato nel report" PREVIOUS="id_report"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="fk_f2_report_pm_on_idrep"/>
+        <KEY NAME="fk_f2_report_pm_on_idrep" TYPE="foreign" FIELDS="id_report" REFTABLE="f2_report_pentaho" REFFIELDS="id" COMMENT="chiave esterna su id_report=report.id" PREVIOUS="primary" NEXT="fk_f2_report_pm_on_idparam"/>
+        <KEY NAME="fk_f2_report_pm_on_idparam" TYPE="foreign" FIELDS="id_report_param" REFTABLE="f2_report_pentaho_param" REFFIELDS="id" COMMENT="chiave esterna su id_param=param.id" PREVIOUS="fk_f2_report_pm_on_idrep"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
